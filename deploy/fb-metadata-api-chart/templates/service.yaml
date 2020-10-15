@@ -5,7 +5,7 @@ metadata:
   namespace: formbuilder-saas-{{ .Values.environmentName }}
   labels:
     app: "fb-metadata-api-{{ .Values.environmentName }}"
-    appGroup: "fb-metadata"
+    appGroup: "fb-metadata-api"
 spec:
   ports:
   - port: 80

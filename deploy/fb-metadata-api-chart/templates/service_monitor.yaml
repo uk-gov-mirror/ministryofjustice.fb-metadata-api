@@ -1,7 +1,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: "fb-metadata-service-monitor-{{ .Values.environmentName }}"
+  name: "fb-metadata-api-service-monitor-{{ .Values.environmentName }}"
   namespace: "formbuilder-saas-{{ .Values.environmentName }}"
 spec:
   selector:
@@ -14,7 +14,7 @@ spec:
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
-  name: "allow-fb-metadata-prometheus-{{ .Values.environmentName }}"
+  name: "allow-fb-metadata-api-prometheus-{{ .Values.environmentName }}"
   namespace: "formbuilder-saas-{{ .Values.environmentName }}"
 spec:
   podSelector:
