@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: "fb-metadata-api-svc-{{ .Values.environmentName }}"
+  namespace: formbuilder-saas-{{ .Values.environmentName }}
+  labels:
+    app: "fb-metadata-api-{{ .Values.environmentName }}"
+    appGroup: "fb-metadata"
+spec:
+  ports:
+  - port: 80
+    name: http
+    targetPort: 3000
+  selector:
+    app: "fb-metadata-api-{{ .Values.environmentName }}"
