@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  metadata-db:
+    image: postgres:10.9-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+      POSTGRES_DB: metadata_local
+
+  metadata-app:
+    build:
+      context: .
+      args:
+        BUNDLE_ARGS: ''
+    ports:
+      - 8080:3000
+    environment:
+      DATABASE_URL: "postgres://postgres:password@metadata-db/metadata_local"
+    links:
+      - metadata-db
+
