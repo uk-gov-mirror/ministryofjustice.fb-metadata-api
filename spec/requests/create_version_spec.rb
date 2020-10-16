@@ -46,8 +46,8 @@ RSpec.describe 'POST /services/:id/versions' do
       }
     end
 
-    it 'returns success status' do
-      expect(response.status).to be(200)
+    it 'returns created status' do
+      expect(response.status).to be(201)
     end
 
     it 'returns the metadata' do
