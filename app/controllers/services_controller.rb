@@ -3,7 +3,7 @@ class ServicesController < ApplicationController
     service = Service.new(service_params)
 
     if service.save
-      metadata = service.metadata.last
+      metadata = service.metadata.order(created_at: :desc).first
 
       render json: {
         service_id: service.id,

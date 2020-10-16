@@ -3,7 +3,7 @@ class VersionsController < ApplicationController
     service = Service.find(params[:service_id])
 
     if service.update(service_params)
-      metadata = service.metadata.last
+      metadata = service.metadata.order(created_at: :desc).first
 
       render json: {
         service_id: service.id,
