@@ -3,7 +3,7 @@ RSpec.describe 'POST /services/:id/versions' do
   let(:service) { create(:service) }
 
   before do
-    post "/services/#{service.id}/versions", params: params
+    post "/services/#{service.id}/versions", params: params, as: :json
   end
 
   context 'when valid attributes' do
@@ -29,7 +29,7 @@ RSpec.describe 'POST /services/:id/versions' do
                 {
                   "_id": "page.upload-cop1a--upload.auto_name__1",
                   "_type": "upload",
-#                  "my_awesome_errors": {},
+                 "errors": {},
                   "hint": "",
                   "label": "Upload your completed supporting information (COP1A)",
                   "name": "upload-cop1a"
@@ -72,7 +72,7 @@ RSpec.describe 'POST /services/:id/versions' do
               {
                 "_id" => "page.upload-cop1a--upload.auto_name__1",
                 "_type" => "upload",
-#                "errors" => {},
+               "errors" => {},
                 "hint" => "",
                 "label" => "Upload your completed supporting information (COP1A)",
                 "name" => "upload-cop1a"
