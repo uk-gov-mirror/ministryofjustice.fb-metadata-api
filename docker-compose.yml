@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   metadata-db:
-    image: postgres:10.9-alpine
+    image: postgres:12.4-alpine
     restart: always
     environment:
       POSTGRES_PASSWORD: password
