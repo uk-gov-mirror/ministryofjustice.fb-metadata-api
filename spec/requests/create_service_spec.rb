@@ -2,7 +2,7 @@ RSpec.describe 'POST /services', type: :request do
   let(:response_body) { JSON.parse(response.body) }
 
   before do
-    post '/services', params: params
+    post '/services', params: params, as: :json
   end
 
   context 'when valid attributes' do

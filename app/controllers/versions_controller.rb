@@ -1,8 +1,8 @@
-class ServicesController < ApplicationController
+class VersionsController < ApplicationController
   def create
-    service = Service.new(service_params)
+    service = Service.find(params[:service_id])
 
-    if service.save
+    if service.update(service_params)
       metadata = service.metadata.order(created_at: :desc).first
 
       render(
