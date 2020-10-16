@@ -1,8 +1,8 @@
-class ServicesController < ApplicationController
+class VersionsController < ApplicationController
   def create
-    service = Service.new(service_params)
+    service = Service.find(params[:service_id])
 
-    if service.save
+    if service.update(service_params)
       metadata = service.metadata.last
 
       render json: {
@@ -11,9 +11,10 @@ class ServicesController < ApplicationController
         created_by: service.created_by,
         version_id: metadata.id,
         locale: metadata.locale
-      }.merge(metadata.data), status: :created
+      }.merge(metadata.data), status: :ok
     else
       render json: { message: service.errors.full_messages }, status: :unprocessable_entity
     end
   end
+
 end

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   get '/health', to: 'health#show'
 
-  resources :services, only: :create
+  resources :services, only: [:create] do
+    resources :versions, only: :create
+  end
 end
