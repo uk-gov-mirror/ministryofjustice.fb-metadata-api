@@ -1,5 +1,11 @@
 class ApplicationController < ActionController::API
+  rescue_from ActiveRecord::RecordNotFound, with: :resource_not_found
+
   private
+
+  def resource_not_found
+    render json: { message: ['Requested Service not found'] }, status: :not_found
+  end
 
   def service_params
     params.permit(:metadata)
