@@ -50,7 +50,7 @@ RSpec.describe 'GET /services/:id' do
 
     it 'returns not found message' do
       expect(response_body).to eq({
-        'message' => 'Resource not found'
+        'message' => ['Requested Service not found']
       })
     end
   end

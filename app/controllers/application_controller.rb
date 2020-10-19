@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
   private
 
   def resource_not_found
-    render json: { message: 'Resource not found' }, status: :not_found
+    render json: { message: ['Requested Service not found'] }, status: :not_found
   end
 
   def service_params
