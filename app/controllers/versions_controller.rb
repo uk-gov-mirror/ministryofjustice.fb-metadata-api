@@ -8,7 +8,7 @@ class VersionsController < ApplicationController
         status: :created
       )
     else
-      render json: { message: service.errors.full_messages }, status: :unprocessable_entity
+      render json: ErrorsSerializer.new(service).attributes, status: :unprocessable_entity
     end
   end
 
@@ -22,6 +22,12 @@ class VersionsController < ApplicationController
     versions = service.metadata.by_locale(locale).all_versions.ordered
 
     render json: VersionsSerialiser.new(service, versions).attributes, status: :ok
+  end
+
+  def show
+    metadata = service.metadata.find(params[:id])
+
+    render json: MetadataSerialiser.new(service, metadata).attributes, status: :ok
   end
 
   def service

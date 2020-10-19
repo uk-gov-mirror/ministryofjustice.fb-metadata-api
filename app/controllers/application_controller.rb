@@ -3,8 +3,8 @@ class ApplicationController < ActionController::API
 
   private
 
-  def resource_not_found
-    render json: { message: ['Requested Service not found'] }, status: :not_found
+  def resource_not_found(exception)
+    render json: ErrorsSerializer.new(exception).attributes, status: :not_found
   end
 
   def service_params
