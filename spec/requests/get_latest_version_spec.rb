@@ -1,4 +1,4 @@
-RSpec.describe 'GET /services/:id' do
+RSpec.describe 'GET /services/:service_id/versions/latest' do
   let(:response_body) { JSON.parse(response.body) }
 
   context 'when service exists' do
@@ -20,7 +20,7 @@ RSpec.describe 'GET /services/:id' do
       end
 
       before do
-        get "/services/#{service.id}", as: :json
+        get "/services/#{service.id}/versions/latest", as: :json
       end
 
       it 'returns success response' do
@@ -63,7 +63,7 @@ RSpec.describe 'GET /services/:id' do
       end
 
       before do
-        get "/services/#{service.id}?locale=cy", as: :json
+        get "/services/#{service.id}/versions/latest?locale=cy", as: :json
       end
 
       it 'returns success response' do
@@ -86,7 +86,7 @@ RSpec.describe 'GET /services/:id' do
 
   context 'when service does not exist' do
     before do
-      get "/services/1234-abcdef", as: :json
+      get "/services/1234-abcdef/versions/latest", as: :json
     end
 
     it 'returns not found response' do
