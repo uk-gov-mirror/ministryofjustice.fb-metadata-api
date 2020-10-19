@@ -10,7 +10,7 @@ class ServicesController < ApplicationController
         status: :created
       )
     else
-      render json: { message: service.errors.full_messages }, status: :unprocessable_entity
+      render json: ErrorsSerializer.new(service).attributes, status: :unprocessable_entity
     end
   end
 end
