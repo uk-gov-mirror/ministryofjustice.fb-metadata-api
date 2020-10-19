@@ -1,7 +1,7 @@
 class ServicesController < ApplicationController
   def show
     service = Service.find(params[:id])
-    metadata = service.metadata.order(created_at: :desc).first
+    metadata = service.last_metadata
 
     render json: MetadataSerialiser.new(service, metadata).attributes, status: :ok
   end
@@ -10,7 +10,7 @@ class ServicesController < ApplicationController
     service = Service.new(service_params)
 
     if service.save
-      metadata = service.metadata.order(created_at: :desc).first
+      metadata = service.last_metadata
 
       render(
         json: MetadataSerialiser.new(service, metadata).attributes,
