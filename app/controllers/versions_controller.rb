@@ -1,7 +1,5 @@
 class VersionsController < ApplicationController
   def create
-    service = Service.find(params[:service_id])
-
     if service.update(service_params)
       metadata = service.latest_metadata
 
@@ -15,10 +13,22 @@ class VersionsController < ApplicationController
   end
 
   def latest
-    service = Service.find(params[:service_id])
-    locale = params[:locale] || 'en'
     metadata = service.metadata.by_locale(locale).latest_version
 
     render json: MetadataSerialiser.new(service, metadata).attributes, status: :ok
+  end
+
+  def index
+    versions = service.metadata.by_locale(locale).all_versions.ordered
+
+    render json: VersionsSerialiser.new(service, versions).attributes, status: :ok
+  end
+
+  def service
+    @_service ||= Service.find(params[:service_id])
+  end
+
+  def locale
+    @_locale ||= params[:locale] || 'en'
   end
 end
