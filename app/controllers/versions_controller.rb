@@ -3,7 +3,7 @@ class VersionsController < ApplicationController
     service = Service.find(params[:service_id])
 
     if service.update(service_params)
-      metadata = service.last_metadata
+      metadata = service.latest_metadata
 
       render(
         json: MetadataSerialiser.new(service, metadata).attributes,

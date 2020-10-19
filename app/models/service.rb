@@ -3,7 +3,7 @@ class Service < ApplicationRecord
   validates :name, :created_by, presence: true
   accepts_nested_attributes_for :metadata
 
-  def last_metadata
-    metadata.order(created_at: :desc).first
+  def latest_metadata
+    metadata.latest_version
   end
 end
