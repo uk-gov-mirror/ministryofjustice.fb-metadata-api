@@ -48,6 +48,11 @@ spec:
               secretKeyRef:
                 name: fb-metadata-api-secrets-{{ .Values.environmentName }}
                 key: secret_key_base
+          - name: ENCODED_PRIVATE_KEY
+            valueFrom:
+              secretKeyRef:
+                name: fb-metadata-api-secrets-{{ .Values.environmentName }}
+                key: encoded_private_key
           # secrets created by terraform
           # which may or may not depend on values
           # canonically defined in secrets.tfvars
