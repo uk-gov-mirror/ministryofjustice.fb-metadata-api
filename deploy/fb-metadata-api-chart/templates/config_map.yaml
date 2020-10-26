@@ -7,5 +7,10 @@ data:
   RAILS_ENV: production
   ENCODED_PRIVATE_KEY: {{ .Values.encoded_private_key }}
   ENCODED_PUBLIC_KEY: {{ .Values.encoded_public_key }}
-  SERVICE_TOKEN_CACHE_ROOT_URL: "http://fb-service-token-cache-svc-{{ .Values.environmentName }}/"
+
+  # There is formbuilder-saas-test or formbuilder-saas-live
+  # and the app should request to test-production and live-production
+  # respectively.
+  #
+  SERVICE_TOKEN_CACHE_ROOT_URL: "http://fb-service-token-cache-svc-{{ .Values.environmentName }}-production/"
   MAX_IAT_SKEW_SECONDS: "60"
