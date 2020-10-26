@@ -1,5 +1,19 @@
 RSpec.describe 'GET /services/:service_id/versions/latest' do
+  include_examples 'application authentication' do
+    let(:action) do
+      service = create(
+        :service,
+        metadata: [build(:metadata)]
+      )
+
+      get "/services/#{service.id}/versions/latest", as: :json
+    end
+  end
   let(:response_body) { JSON.parse(response.body) }
+
+  before do
+    allow_any_instance_of(Fb::Jwt::Auth).to receive(:verify!).and_return(true)
+  end
 
   context 'when service exists' do
     context 'when default locale' do
@@ -95,7 +109,7 @@ RSpec.describe 'GET /services/:service_id/versions/latest' do
 
     it 'returns not found message' do
       expect(response_body).to eq({
-        'message' => ['Requested Service not found']
+        'message' => ["Couldn't find Service with 'id'=1234-abcdef"]
       })
     end
   end

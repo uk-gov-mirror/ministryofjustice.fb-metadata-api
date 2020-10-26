@@ -22,6 +22,9 @@ RSpec.describe 'GET /services/users/:user_id' do
     )
   end
 
+  before do
+    allow_any_instance_of(Fb::Jwt::Auth).to receive(:verify!).and_return(true)
+  end
 
   context 'when there are services which the user contributed to' do
     before do

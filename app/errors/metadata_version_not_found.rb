@@ -1,0 +1,2 @@
+class MetadataVersionNotFound < StandardError
+end

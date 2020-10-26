@@ -1,29 +1,14 @@
 class ErrorsSerializer
-  attr_reader :object
+  attr_reader :object, :message
 
-  def initialize(object)
+  def initialize(object, message:)
     @object = object
+    @message = message
   end
 
   def attributes
     {
-      message: message
+      message: [message].flatten
     }
-  end
-
-  def message
-    if object.respond_to? :errors
-      object.errors.full_messages
-    else
-      ["Requested #{resource_name} not found"]
-    end
-  end
-
-  def resource_name
-    if /Metadata/.match(object.message)
-      'Version'
-    else
-      'Service'
-    end
   end
 end

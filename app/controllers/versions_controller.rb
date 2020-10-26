@@ -8,7 +8,10 @@ class VersionsController < ApplicationController
         status: :created
       )
     else
-      render json: ErrorsSerializer.new(service).attributes, status: :unprocessable_entity
+      render json: ErrorsSerializer.new(
+        service,
+        message: service.errors.full_messages
+      ).attributes, status: :unprocessable_entity
     end
   end
 
@@ -25,7 +28,12 @@ class VersionsController < ApplicationController
   end
 
   def show
-    metadata = service.metadata.find(params[:id])
+    metadata = service.metadata.find_by(id: params[:id])
+    if metadata.nil?
+      raise MetadataVersionNotFound.new(
+        "Couldn't find Metadata Version with 'id'=#{params[:id]}"
+      )
+    end
 
     render json: MetadataSerialiser.new(service, metadata).attributes, status: :ok
   end
