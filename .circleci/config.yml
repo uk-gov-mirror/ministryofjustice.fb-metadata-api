@@ -10,6 +10,12 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
+      - run:
+          name: security
+          command: docker-compose run --rm metadata-app bundle exec brakeman -q --no-pager
+      - run:
+          name: test
+          command: docker-compose run --rm metadata-app bundle exec rspec
       - slack/status: &slack_status
           fail_only: true
           only_for_branches: main
