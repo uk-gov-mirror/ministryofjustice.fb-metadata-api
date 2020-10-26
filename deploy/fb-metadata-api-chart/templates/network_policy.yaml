@@ -25,3 +25,10 @@ spec:
     ports:
     - protocol: TCP
       port: 3000
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: formbuilder-platform-{{ .Values.environmentName }}-production
+    ports:
+    - protocol: TCP
+      port: 3000
