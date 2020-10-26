@@ -39,7 +39,7 @@ spec:
         # defined in config_map.yaml
         envFrom:
           - configMapRef:
-              name: fb-metadata-api-env-{{ .Values.environmentName }}
+              name: fb-metadata-api-config-map
         env:
           - name: SENTRY_CURRENT_ENV
             value: {{ .Values.environmentName }}
