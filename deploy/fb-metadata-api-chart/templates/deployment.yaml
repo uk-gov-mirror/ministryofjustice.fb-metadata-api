@@ -15,6 +15,7 @@ spec:
       labels:
         app: "fb-metadata-api-{{ .Values.environmentName }}"
         appGroup: "fb-metadata-api"
+        fb-service-token-cache-access: "true"
         tier: "frontend"
     spec:
       containers:
