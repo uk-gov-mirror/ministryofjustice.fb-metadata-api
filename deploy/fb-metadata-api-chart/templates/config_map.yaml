@@ -12,5 +12,5 @@ data:
   # and the app should request to test-production and live-production
   # respectively.
   #
-  SERVICE_TOKEN_CACHE_ROOT_URL: "http://fb-service-token-cache-svc-{{ .Values.environmentName }}-production/"
+  SERVICE_TOKEN_CACHE_ROOT_URL: "http://fb-service-token-cache-svc-{{ .Values.environmentName }}-production.formbuilder-platform-{{ .Values.environmentName }}-production/"
   MAX_IAT_SKEW_SECONDS: "60"
