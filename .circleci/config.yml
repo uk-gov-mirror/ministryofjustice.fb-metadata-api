@@ -15,7 +15,7 @@ jobs:
           command: docker-compose run --rm metadata-app bundle exec brakeman -q --no-pager
       - run:
           name: test
-          command: docker-compose run --rm metadata-app bundle exec rspec
+          command: make spec
       - slack/status: &slack_status
           fail_only: true
           only_for_branches: main

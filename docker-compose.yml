@@ -20,4 +20,24 @@ services:
       DATABASE_URL: "postgres://postgres:password@metadata-db/metadata_local"
     links:
       - metadata-db
+      - service-token-cache-app
 
+  service-token-cache-app:
+    container_name: service-token-cache-app
+    build:
+      context: https://github.com/ministryofjustice/fb-service-token-cache.git
+      # dockerfile:
+    environment:
+      SENTRY_DSN: sentry-dsn
+      RAILS_ENV: development
+      RAILS_LOG_TO_STDOUT: 'true'
+      REDIS_URL: service-token-cache-redis
+      SERVICE_TOKEN_CACHE_TTL: 999999
+    depends_on:
+      - service-token-cache-redis
+    ports:
+      - 3004:3000
+
+  service-token-cache-redis:
+    container_name: service-token-cache-redis
+    image: redis:5.0.6-alpine
