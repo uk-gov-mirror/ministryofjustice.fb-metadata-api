@@ -1,7 +1,8 @@
 class AuthenticateApplication
   def self.before(controller)
+    token = controller.request.authorization.to_s.gsub(/^Bearer /, '')
     Fb::Jwt::Auth.new(
-      token: controller.request.authorization,
+      token: token,
       leeway: ENV['MAX_IAT_SKEW_SECONDS'].to_i,
       logger: Rails.logger
     ).verify!

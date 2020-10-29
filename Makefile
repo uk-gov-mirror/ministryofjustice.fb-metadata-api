@@ -6,8 +6,8 @@ build:
 	$(DOCKER_COMPOSE) up -d --build metadata-app
 
 .PHONY: spec
-spec: build
-	$(DOCKER_COMPOSE) run -e RAILS_ENV=test --rm  metadata-app bundle exec rspec
+spec: seed_public_key build
+	$(DOCKER_COMPOSE) run --rm  metadata-app bundle exec rspec
 
 .PHONY: all_units
 all_units: build
@@ -32,5 +32,5 @@ seed_public_key: generate_public_key
 	docker exec metadata-app-service-token-cache-redis redis-cli set 'encoded-public-key-integration-tests' '$(shell cat ./spec/fixtures/public.pem | base64)'
 
 .PHONY: integration
-integration: build seed_public_key
+integration: seed_public_key build
 	$(DOCKER_COMPOSE) run --rm metadata-app bundle exec rspec spec/integration/*_spec.rb

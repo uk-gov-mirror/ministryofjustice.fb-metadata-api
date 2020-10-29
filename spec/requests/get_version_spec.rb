@@ -32,7 +32,7 @@ RSpec.describe 'GET /services/:service_id/versions/:version_id' do
     end
 
     it 'returns metadata' do
-      expect(response_body).to eq({
+      expect(response_body).to include({
         'configuration' => { '_id' => 'service', '_type' => 'config.service' },
         'created_by' => latest_version.created_by,
         'locale' => 'en',

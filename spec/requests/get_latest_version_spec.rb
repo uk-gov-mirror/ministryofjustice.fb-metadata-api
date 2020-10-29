@@ -42,7 +42,7 @@ RSpec.describe 'GET /services/:service_id/versions/latest' do
       end
 
       it 'returns metadata' do
-        expect(response_body).to eq({
+        expect(response_body).to include({
           'configuration' => { 'email_input_name_user' => 'mojo' },
           'created_by' => latest_version.created_by,
           'locale' => 'en',
@@ -85,7 +85,7 @@ RSpec.describe 'GET /services/:service_id/versions/latest' do
       end
 
       it 'returns the welsh version' do
-        expect(response_body).to eq({
+        expect(response_body).to include({
           'configuration' => { 'pdf_heading' => 'Helo Byd!' },
           'created_by' => welsh_version.created_by,
           'locale' => 'cy',

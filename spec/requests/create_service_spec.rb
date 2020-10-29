@@ -110,8 +110,11 @@ RSpec.describe 'POST /services', type: :request do
     end
 
     it 'returns error message' do
-      expect(response_body['message']).to eq(
+      expect(response_body['message']).to match_array(
         [
+          "Metadata locale can't be blank",
+          "Metadata data can't be blank",
+          "Metadata created by can't be blank",
           "Name can't be blank",
           "Created by can't be blank"
         ]
