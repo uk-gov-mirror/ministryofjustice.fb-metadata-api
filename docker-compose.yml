@@ -14,10 +14,34 @@ services:
       context: .
       args:
         BUNDLE_ARGS: ''
+    tty: true
+    stdin_open: true
     ports:
       - 8080:3000
     environment:
       DATABASE_URL: "postgres://postgres:password@metadata-db/metadata_local"
+      RAILS_ENV: test
+      SERVICE_TOKEN_CACHE_ROOT_URL: 'http://metatada-app-service-token-cache-app:3000'
+      MAX_IAT_SKEW_SECONDS: '60'
     links:
       - metadata-db
+      - metatada-app-service-token-cache-app
 
+  metatada-app-service-token-cache-app:
+    container_name: metadata-app-service-token-cache-app
+    build:
+      context: https://github.com/ministryofjustice/fb-service-token-cache.git
+    environment:
+      SENTRY_DSN: sentry-dsn
+      RAILS_ENV: test
+      RAILS_LOG_TO_STDOUT: 'true'
+      REDIS_URL: metatada-app-service-token-cache-redis
+      SERVICE_TOKEN_CACHE_TTL: 999999
+    depends_on:
+      - metatada-app-service-token-cache-redis
+    ports:
+      - 3004:3000
+
+  metatada-app-service-token-cache-redis:
+    container_name: metadata-app-service-token-cache-redis
+    image: redis:5.0.6-alpine

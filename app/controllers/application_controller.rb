@@ -44,7 +44,11 @@ class ApplicationController < ActionController::API
         }]
       }
     else
-      {}
+      {
+        name: nil,
+        created_by: nil,
+        metadata_attributes: [{}]
+      }
     end
   end
 end
