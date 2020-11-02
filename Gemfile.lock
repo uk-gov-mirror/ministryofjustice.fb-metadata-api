@@ -70,6 +70,9 @@ GEM
     factory_bot_rails (6.1.0)
       factory_bot (~> 6.1.0)
       railties (>= 5.0.0)
+    faraday (1.1.0)
+      multipart-post (>= 1.2, < 3)
+      ruby2_keywords
     fb-jwt-auth (0.2.2)
       activesupport
       json
@@ -104,6 +107,7 @@ GEM
     minitest (5.14.2)
     msgpack (1.3.3)
     multi_xml (0.6.0)
+    multipart-post (2.1.1)
     nio4r (2.5.4)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
@@ -160,6 +164,9 @@ GEM
       rspec-mocks (~> 3.9)
       rspec-support (~> 3.9)
     rspec-support (3.9.3)
+    ruby2_keywords (0.0.2)
+    sentry-raven (3.1.1)
+      faraday (>= 1.0)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -196,6 +203,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rails (~> 6.0.2, >= 6.0.2.1)
   rspec-rails
+  sentry-raven
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
