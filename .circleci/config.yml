@@ -54,7 +54,11 @@ jobs:
             PLATFORM_ENV: test
             K8S_NAMESPACE: formbuilder-saas-test
           command: './deploy-scripts/bin/deploy'
-      - slack/status: *slack_status
+      - slack/status:
+          only_for_branches: main
+          success_message: ":rocket:  Successfully deployed to Test  :guitar:"
+          failure_message: ":alert:  Failed to deploy to Test  :try_not_to_cry:"
+          include_job_number_field: false
 
 workflows:
   version: 2
@@ -68,4 +72,3 @@ workflows:
             branches:
               only:
                 - main
-                - deployment
