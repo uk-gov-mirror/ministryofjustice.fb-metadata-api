@@ -67,6 +67,11 @@ spec:
               secretKeyRef:
                 name: rds-instance-formbuilder-metadata-api-{{ .Values.environmentName }}
                 key: url
+          - name: SENTRY_DSN
+            valueFrom:
+              secretKeyRef:
+                name: fb-metadata-api-secrets-{{ .Values.environmentName }}
+                key: sentry_dsn
       volumes:
         - name: tmp-files
           emptyDir: {}
