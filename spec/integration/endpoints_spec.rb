@@ -350,4 +350,23 @@ RSpec.describe 'API integration tests' do
       ).to match_array(['Token is not valid: error Signature verification raised'])
     end
   end
+
+  context 'when route does not exist' do
+    let(:response) do
+      MetadataApiTestClient.get(
+        '/services/i-dont-exist-9999',
+        headers: authorisation_headers
+      )
+    end
+
+    it 'returns not found' do
+      expect(response.code).to be(404)
+    end
+
+    it 'returns a error message' do
+      expect(
+        JSON.parse(response.body, symbolize_names: true)[:message]
+      ).to eq(["No route matches GET '/services/i-dont-exist-9999'"])
+    end
+  end
 end

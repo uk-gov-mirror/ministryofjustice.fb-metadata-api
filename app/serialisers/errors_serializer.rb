@@ -1,8 +1,7 @@
 class ErrorsSerializer
   attr_reader :object, :message
 
-  def initialize(object, message:)
-    @object = object
+  def initialize(message:)
     @message = message
   end
 

@@ -7,4 +7,6 @@ Rails.application.routes.draw do
       get :latest, on: :collection
     end
   end
+
+  match '*unmatched', to: 'application#not_found', via: :all
 end

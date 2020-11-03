@@ -1,13 +1,14 @@
 class ApplicationController < ActionController::API
-  RECORD_NOT_FOUND_EXCEPTIONS = [
+  NOT_FOUND_EXCEPTIONS = [
     ActiveRecord::RecordNotFound,
     MetadataVersionNotFound
   ]
-  rescue_from(*RECORD_NOT_FOUND_EXCEPTIONS) do |exception|
+  rescue_from(*NOT_FOUND_EXCEPTIONS) do |exception|
     render json: ErrorsSerializer.new(
-      exception, message: exception.message
+      message: exception.message
     ).attributes, status: :not_found
   end
+
   FB_JWT_EXCEPTIONS = [
     Fb::Jwt::Auth::TokenNotPresentError,
     Fb::Jwt::Auth::TokenNotValidError,
@@ -17,17 +18,19 @@ class ApplicationController < ActionController::API
   ]
   rescue_from(*FB_JWT_EXCEPTIONS) do |exception|
     render json: ErrorsSerializer.new(
-      exception, message: exception.message
+      message: exception.message
     ).attributes, status: :unauthorized
   end
 
   before_action AuthenticateApplication
 
-  private
-
-  def resource_not_found(exception)
-    render json: ErrorsSerializer.new(exception).attributes, status: :not_found
+  def not_found
+    render json: ErrorsSerializer.new(
+      message: "No route matches #{request.method} '#{request.path}'"
+    ).attributes, status: :not_found
   end
+
+  private
 
   def service_params
     params.permit(:metadata)
