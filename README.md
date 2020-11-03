@@ -1,24 +1,32 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Application responsible to manage all metadata versions from differences
+services in the Ministry of Justice online team.
 
-Things you may want to cover:
+## Dependencies
 
-* Ruby version
+* Docker
 
-* System dependencies
+## Setup
 
-* Configuration
+```
+  make build
+```
 
-* Database creation
+## Running specs
 
-* Database initialization
+```
+  make spec
+```
 
-* How to run the test suite
+### Running integration tests only
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+  make integration
+```
 
-* Deployment instructions
+### Running unit tests only
 
-* ...
+```
+  make all_units
+```
