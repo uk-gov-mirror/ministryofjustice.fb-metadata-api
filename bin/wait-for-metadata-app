@@ -1,0 +1,8 @@
+#!/bin/sh
+
+until docker-compose exec metadata-app wget http://localhost:3000/health -O - | grep healthy; do
+   echo "Waiting for metadata app to start accepting traffic...";
+   sleep 1
+done
+
+echo "Metadata app is accepting traffic";

@@ -20,9 +20,13 @@ unit: build
 
 .PHONY: seed_public_key
 seed_public_key:
-	$(DOCKER_COMPOSE) up -d --build metatada-app-service-token-cache-redis
+	$(DOCKER_COMPOSE) up -d --build metadata-app-service-token-cache-redis
 	ruby ./scripts/seed_test_public_key.rb
 
 .PHONY: integration
 integration: seed_public_key build
 	$(DOCKER_COMPOSE) run --rm metadata-app bundle exec rspec spec/integration/*_spec.rb
+
+load-test-local: seed_public_key build
+	./bin/wait-for-metadata-app
+	cat spec/fixtures/private.pem | base64 | xargs ./bin/load-test

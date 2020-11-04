@@ -1,0 +1,95 @@
+#!/bin/bash
+
+set -e -u -o pipefail
+
+rate=50
+duration="20s"
+
+BASEDIR=$(dirname $0)
+private_key=$1
+
+domain=${DOMAIN:-http://localhost:8080}
+
+## CREATE SERVICE ##
+access_token=$($BASEDIR/generate_access_token $private_key)
+create_service_url="$domain/services"
+echo "======= ${rate} requests in ${duration} - 'POST ${create_service_url}' =========="
+  echo "POST $create_service_url" | \
+  vegeta attack -rate=$rate \
+  -header "Content-type: application/json" \
+  -header "Accept: application/json" \
+  -header "Authorization: Bearer ${access_token}" \
+  -body "spec/fixtures/create_service.json" \
+  -duration=$duration | \
+  tee results.bin | \
+  vegeta report
+
+## CREATE VERSION ##
+access_token=$($BASEDIR/generate_access_token $private_key)
+service_id=$(curl -X POST http://localhost:8080/services -H "Accept: application/json" -H "Authorization: Bearer ${access_token}" -H "Content-Type: application/json" -d "@spec/fixtures/create_service.json" | jq -r .service_id)
+create_version_url="$domain/services/${service_id}/versions"
+echo "======= ${rate} requests in ${duration} - 'POST ${create_version_url}' =========="
+  echo "POST $create_version_url" | \
+  vegeta attack -rate=$rate \
+  -header "Content-type: application/json" \
+  -header "Accept: application/json" \
+  -header "Authorization: Bearer ${access_token}" \
+  -body "spec/fixtures/create_version.json" \
+  -duration=$duration | \
+  tee results.bin | \
+  vegeta report
+
+## GET VERSION ##
+access_token=$($BASEDIR/generate_access_token $private_key)
+get_version_url="$domain/services/${service_id}/versions"
+echo "======= ${rate} requests in ${duration} - 'GET ${get_version_url}' =========="
+  echo "GET $get_version_url" | \
+  vegeta attack -rate=$rate \
+  -header "Content-type: application/json" \
+  -header "Authorization: Bearer ${access_token}" \
+  -header "Accept: application/json" \
+  -duration=$duration | \
+  tee results.bin | \
+  vegeta report
+
+## GET LATEST VERSION ##
+access_token=$($BASEDIR/generate_access_token $private_key)
+get_latest_version_url="$domain/services/${service_id}/versions/latest"
+echo "======= ${rate} requests in ${duration} - 'GET ${get_latest_version_url}' =========="
+  echo "GET $get_latest_version_url" | \
+  vegeta attack -rate=$rate \
+  -header "Content-type: application/json" \
+  -header "Authorization: Bearer ${access_token}" \
+  -header "Accept: application/json" \
+  -duration=$duration | \
+  tee results.bin | \
+  vegeta report
+
+## GET SPECIFIC VERSION ##
+access_token=$($BASEDIR/generate_access_token $private_key)
+version_id=$(curl -X POST http://localhost:8080/services/${service_id}/versions -H "Authorization: Bearer ${access_token}" -H "Accept: application/json" -H "Content-Type: application/json" -d "@spec/fixtures/create_service.json" | jq -r .version_id)
+get_specific_version_url="$domain/services/${service_id}/versions/${version_id}"
+echo "======= ${rate} requests in ${duration} - 'GET ${get_specific_version_url}' =========="
+  echo "GET $get_specific_version_url" | \
+  vegeta attack -rate=$rate \
+  -header "Content-type: application/json" \
+  -header "Authorization: Bearer ${access_token}" \
+  -header "Accept: application/json" \
+  -duration=$duration | \
+  tee results.bin | \
+  vegeta report
+
+## GET USER SERVICES ##
+user_id=$(curl -X POST http://localhost:8080/services -H "Authorization: Bearer ${access_token}" -H "Accept: application/json" -H "Content-Type: application/json" -d "@spec/fixtures/create_service.json" | jq -r .created_by)
+#
+access_token=$($BASEDIR/generate_access_token $private_key)
+get_user_url="$domain/services/users/${user_id}"
+echo "======= ${rate} requests in ${duration} - 'GET ${get_user_url}' =========="
+  echo "GET $get_user_url" | \
+  vegeta attack -rate=$rate \
+  -header "Content-type: application/json" \
+  -header "Accept: application/json" \
+  -header "Authorization: Bearer ${access_token}" \
+  -duration=$duration | \
+  tee results.bin | \
+  vegeta report
