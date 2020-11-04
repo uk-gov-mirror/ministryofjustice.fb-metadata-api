@@ -328,29 +328,6 @@ RSpec.describe 'API integration tests' do
     end
   end
 
-  context 'when token is signed with the wrong private key' do
-    let(:another_private_key) { OpenSSL::PKey::RSA.generate(2048) }
-    let(:access_token) do
-      JWT.encode(
-        jwt_payload,
-        another_private_key,
-        'RS256'
-      )
-    end
-
-    it 'should return a signature verification error' do
-      response = metadata_api_test_client.create_service(
-        body: request_body,
-        authorisation_headers: authorisation_headers
-      )
-
-      expect(response.code).to be(401)
-      expect(
-        parse_response(response)[:message]
-      ).to match_array(['Token is not valid: error Signature verification raised'])
-    end
-  end
-
   context 'when route does not exist' do
     let(:response) do
       MetadataApiTestClient.get(
