@@ -73,7 +73,7 @@ GEM
     faraday (1.1.0)
       multipart-post (>= 1.2, < 3)
       ruby2_keywords
-    fb-jwt-auth (0.2.2)
+    fb-jwt-auth (0.3.0)
       activesupport
       json
       jwt
@@ -187,7 +187,7 @@ GEM
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    zeitwerk (2.4.0)
+    zeitwerk (2.4.1)
 
 PLATFORMS
   ruby
@@ -197,7 +197,7 @@ DEPENDENCIES
   brakeman
   byebug
   factory_bot_rails
-  fb-jwt-auth (~> 0.2.2)
+  fb-jwt-auth (~> 0.3.0)
   httparty
   pg (>= 0.18, < 2.0)
   puma (~> 5.0)
