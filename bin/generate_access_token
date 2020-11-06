@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+
+$VERBOSE = nil
+require 'openssl'
+require 'base64'
+require 'bundler/setup'
+Bundler.require
+
+encoded_private_key = ARGV[0]
+issuer = 'integration-tests'
+namespace = 'formbuilder-saas-test'
+
+if encoded_private_key.blank?
+  puts "You need to pass an encoded 'private_key'"
+  exit
+end
+
+private_key = OpenSSL::PKey::RSA.new(Base64.strict_decode64(encoded_private_key.chomp))
+
+jwt = JWT.encode({
+  iss: issuer,
+  namespace: namespace,
+  iat: Time.current.to_i
+},
+private_key,
+'RS256'
+)
+
+puts "#{jwt}"

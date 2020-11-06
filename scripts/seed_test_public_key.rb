@@ -11,4 +11,4 @@ File.open('./spec/fixtures/public.pem', 'w') { |file| file.write(public_key) }
 
 puts 'Putting public key in Redis'
 encoded_public_key = Base64.strict_encode64(public_key)
-`docker exec metadata-app-service-token-cache-redis redis-cli set 'encoded-public-key-integration-tests' #{encoded_public_key}`
+`docker-compose exec metadata-app-service-token-cache-redis redis-cli set 'encoded-public-key-integration-tests' #{encoded_public_key}`
