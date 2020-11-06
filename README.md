@@ -42,3 +42,19 @@ tests are signed using the private key.
 ```
   make all_units
 ```
+
+## Running load test
+
+We have a script that will stress test all endpoints of the API.
+
+You can install dependencies via homebrew. The dependencies for this script are:
+
+* [Vegeta load test tool](https://github.com/tsenart/vegeta)
+* [jq](https://formulae.brew.sh/formula/jq)
+
+The script requires a private key so we can make requests to the
+metadata api to sign the JWT access token.
+
+```
+   make load-test-local
+```
