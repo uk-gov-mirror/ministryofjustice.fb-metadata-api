@@ -1,0 +1,45 @@
+{
+  "$id": "http://gov.uk/schema/v1.0.0/service/base",
+  "_name": "service.base",
+  "title": "Base service schema",
+  "description": "Base schema for a service",
+  "type": "object",
+  "properties": {
+    "service_id": {
+      "type": "string"
+    },
+    "service_name": {
+      "type": "string"
+    },
+    "version_id": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "created_by": {
+      "type": "string"
+    },
+    "locale": {
+      "$ref": "../service/locale.json"
+    },
+    "configuration": {
+      "$ref": "../config/service.json"
+    },
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "required": [
+    "service_id",
+    "service_name",
+    "created_by",
+    "locale",
+    "configuration",
+    "pages"
+  ],
+  "additionalProperties": false
+}

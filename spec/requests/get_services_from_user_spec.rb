@@ -36,8 +36,8 @@ RSpec.describe 'GET /services/users/:user_id' do
     end
 
     it 'returns services that user contributed to' do
-      expect(response_body).to eq({
-        "services" => [
+      expect(response_body['services']).to match_array(
+        [
           {
             "service_name" => service_one.name,
             "service_id" => service_one.id
@@ -47,7 +47,7 @@ RSpec.describe 'GET /services/users/:user_id' do
             "service_id" => service_three.id
           }
         ]
-      })
+      )
     end
   end
 

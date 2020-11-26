@@ -23,6 +23,7 @@ class ApplicationController < ActionController::API
   end
 
   before_action AuthenticateApplication
+  before_action :validate_schema
 
   def not_found
     render json: ErrorsSerializer.new(
@@ -53,5 +54,14 @@ class ApplicationController < ActionController::API
         metadata_attributes: [{}]
       }
     end
+  end
+
+  def validate_schema
+    ValidateSchema.before(self) if request.post?
+  rescue JSON::Schema::ValidationError, JSON::Schema::SchemaError, SchemaNotFoundError => e
+    render json:
+      ErrorsSerializer.new(
+        message: e.message
+      ).attributes, status: :unprocessable_entity
   end
 end

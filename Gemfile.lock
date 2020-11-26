@@ -56,6 +56,8 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
+    addressable (2.7.0)
+      public_suffix (>= 2.0.2, < 5.0)
     bootsnap (1.5.1)
       msgpack (~> 1.0)
     brakeman (4.10.0)
@@ -86,6 +88,8 @@ GEM
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     json (2.3.1)
+    json-schema (2.8.1)
+      addressable (>= 2.4)
     jwt (2.2.2)
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -199,6 +203,7 @@ DEPENDENCIES
   factory_bot_rails
   fb-jwt-auth (~> 0.3.0)
   httparty
+  json-schema (>= 2.8.1)
   pg (>= 0.18, < 2.0)
   puma (~> 5.1)
   rails (~> 6.0.2, >= 6.0.2.1)
