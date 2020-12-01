@@ -11,7 +11,7 @@
       "description": "Whether to show or hide the page/component",
       "oneOf": [
         {
-          "$ref": "../definition/conditional/boolean.json"
+          "$ref": "../definition/conditional.boolean.json"
         }
       ],
       "default": true
@@ -19,7 +19,7 @@
   },
   "allOf": [
     {
-      "$ref": "../definition/data"
+      "$ref": "../definition/data.json"
     }
   ],
   "category": [

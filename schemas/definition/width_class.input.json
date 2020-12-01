@@ -1,13 +1,13 @@
 {
-  "$id": "http://gov.uk/schema/v1.0.0/definition/widthclass/input",
-  "_name": "definition.widthclass.input",
+  "$id": "http://gov.uk/schema/v1.0.0/definition/width_class/input",
+  "_name": "definition.width_class.input",
   "title": "Input width class definition",
   "properties": {
-    "widthClassInput": {
+    "width_class_input": {
       "title": "Input width",
       "description": "How wide the input should be visually",
       "type": "string",
-      "enumMap": {
+      "enum_map": {
         "2": "2 characters",
         "3": "3 characters",
         "4": "4 characters",
@@ -38,7 +38,7 @@
         "full"
       ],
       "category": [
-        "htmlattributes"
+        "html_attributes"
       ]
     }
   },

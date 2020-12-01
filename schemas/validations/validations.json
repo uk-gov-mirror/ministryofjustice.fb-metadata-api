@@ -4,26 +4,26 @@
   "title": "Validations",
   "type": "object",
   "definitions": {
-    "errorStrings": {
+    "error_strings": {
       "type": "object",
       "properties": {
         "any": {
           "title": "Error message",
           "description": "Error message users see if their answer fails validation - write {control} to show the question in the message",
           "type": "string",
-          "role": "errorString"
+          "role": "error_string"
         },
         "inline": {
           "title": "Input error",
           "description": "Specific error message users see next to the input if their answer fails validation - only set if your input message absolutely must be different to that shown in the summary",
           "type": "string",
-          "role": "errorString"
+          "role": "error_string"
         },
         "summary": {
           "title": "Summary error",
           "description": "Specific error message users see at the top of a page if their answer fails validation - only set if your summary message absolutely must be different to that shown for the input",
           "type": "string",
-          "role": "errorString"
+          "role": "error_string"
         }
       }
     },
@@ -32,60 +32,60 @@
       "description": "Whether the user must answer a question",
       "oneOf": [
         {
-          "$ref": "http://gov.uk/schema/v1.0.0/definition/conditional/boolean"
+          "$ref": "../definition/conditional.boolean.json"
         }
       ],
       "default": true
     },
-    "errorsRequired": {
+    "errors_required": {
       "title": "Error messages for ‘Required’",
       "allOf": [
         {
-          "$ref": "#/definitions/errorStrings"
+          "$ref": "#/definitions/error_strings"
         }
       ]
     },
-    "errorsAccept": {
+    "errors_accept": {
       "title": "Error messages for ‘Accept’",
       "allOf": [
         {
-          "$ref": "#/definitions/errorStrings"
+          "$ref": "#/definitions/error_strings"
         }
       ]
     },
-    "errorsMaxSize": {
+    "errors_max_size": {
       "title": "Error messages for ‘Max Size’",
       "allOf": [
         {
-          "$ref": "#/definitions/errorStrings"
+          "$ref": "#/definitions/error_strings"
         }
       ]
     },
-    "minLength": {
+    "min_length": {
       "title": "Minimum length",
       "description": "The minimum characters users must enter",
       "type": "number",
       "minimum": 0
     },
-    "errorsMinLength": {
+    "errors_min_length": {
       "title": "Error messages for ‘Minimum length’",
       "allOf": [
         {
-          "$ref": "#/definitions/errorStrings"
+          "$ref": "#/definitions/error_strings"
         }
       ]
     },
-    "maxLength": {
+    "max_length": {
       "title": "Maximum length",
       "description": "The maximum characters users can enter",
       "type": "number",
       "minimum": 0
     },
-    "errorsMaxLength": {
+    "errors_max_length": {
       "title": "Error messages for ‘Maximum length’",
       "allOf": [
         {
-          "$ref": "#/definitions/errorStrings"
+          "$ref": "#/definitions/error_strings"
         }
       ]
     },
@@ -94,11 +94,11 @@
       "description": "A regular expression for validating users’ answers",
       "type": "string"
     },
-    "errorsPattern": {
+    "errors_pattern": {
       "title": "Error messages for pattern",
       "allOf": [
         {
-          "$ref": "#/definitions/errorStrings"
+          "$ref": "#/definitions/error_strings"
         }
       ]
     },
@@ -107,25 +107,25 @@
       "description": "Format used for validating users’ answers",
       "type": "string"
     },
-    "errorsFormat": {
+    "errors_format": {
       "title": "Error messages for format",
       "allOf": [
         {
-          "$ref": "#/definitions/errorStrings"
+          "$ref": "#/definitions/error_strings"
         }
       ]
     },
-    "multipleOf": {
+    "multiple_of": {
       "title": "Multiple of",
       "description": "Whether users must enter a multiple of another number",
       "type": "number",
       "minimum": 0
     },
-    "errorsMultipleOf": {
+    "errors_multiple_of": {
       "title": "Error messages for ‘Multiple of’",
       "allOf": [
         {
-          "$ref": "#/definitions/errorStrings"
+          "$ref": "#/definitions/error_strings"
         }
       ]
     },
@@ -135,24 +135,24 @@
       "type": "number",
       "minimum": 0
     },
-    "errorsMaximum": {
+    "errors_maximum": {
       "title": "Error messages for ‘Maximum value’",
       "allOf": [
         {
-          "$ref": "#/definitions/errorStrings"
+          "$ref": "#/definitions/error_strings"
         }
       ]
     },
-    "exclusiveMaximum": {
+    "exclusive_maximum": {
       "title": "Is maximum value exclusive?",
       "description": "Excludes the maximum value from the range users can enter",
       "type": "boolean"
     },
-    "errorsExclusiveMaximum": {
+    "errors_exclusive_maximum": {
       "title": "Error messages for ‘Maximum value is exclusive",
       "allOf": [
         {
-          "$ref": "#/definitions/errorStrings"
+          "$ref": "#/definitions/error_strings"
         }
       ]
     },
@@ -162,56 +162,56 @@
       "type": "number",
       "minimum": 0
     },
-    "errorsMinimum": {
+    "errors_minimum": {
       "title": "Error messages for for ‘Minimum value’",
       "allOf": [
         {
-          "$ref": "#/definitions/errorStrings"
+          "$ref": "#/definitions/error_strings"
         }
       ]
     },
-    "exclusiveMinimum": {
+    "exclusive_minimum": {
       "title": "Is minimum value exclusive?",
       "description": "Excludes the minimum value from the range users can enter",
       "type": "boolean"
     },
-    "errorsExclusiveMinimum": {
+    "errors_exclusive_minimum": {
       "title": "Error messages for ‘Minimum value is exclusive",
       "allOf": [
         {
-          "$ref": "#/definitions/errorStrings"
+          "$ref": "#/definitions/error_strings"
         }
       ]
     },
-    "dateBefore": {
+    "date_before": {
       "title": "Before date",
       "description": "Date which user input must be before - eg. 2000-10-24",
       "type": "string",
       "format": "date"
     },
-    "errorsDateBefore": {
+    "errors_date_before": {
       "title": "Error messages for ‘Before date’",
       "allOf": [
         {
-          "$ref": "#/definitions/errorStrings"
+          "$ref": "#/definitions/error_strings"
         }
       ]
     },
-    "dateAfter": {
+    "date_after": {
       "title": "After date",
       "description": "Date which user input must be after - eg. 2000-10-24",
       "type": "string",
       "format": "date"
     },
-    "errorsDateAfter": {
+    "errors_date_after": {
       "title": "Error messages for ‘After date’",
       "allOf": [
         {
-          "$ref": "#/definitions/errorStrings"
+          "$ref": "#/definitions/error_strings"
         }
       ]
     },
-    "dateWithinNext": {
+    "date_within_next": {
       "title": "Within next",
       "description": "Date which user input must be before - eg. 1y, 4Mm, 2w, 100d",
       "type": "object",
@@ -234,15 +234,15 @@
         "unit"
       ]
     },
-    "errorsDateWithinNext": {
+    "errors_date_within_next": {
       "title": "Error messages for ‘Within next’",
       "allOf": [
         {
-          "$ref": "#/definitions/errorStrings"
+          "$ref": "#/definitions/error_strings"
         }
       ]
     },
-    "dateWithinLast": {
+    "date_within_last": {
       "title": "Within last",
       "description": "Date which user input must be before - eg. 1y, 4Mm, 2w, 100d",
       "type": "object",
@@ -265,15 +265,15 @@
         "unit"
       ]
     },
-    "errorsDateWithinLast": {
+    "errors_date_within_last": {
       "title": "Error messages for ‘Within last’",
       "allOf": [
         {
-          "$ref": "#/definitions/errorStrings"
+          "$ref": "#/definitions/error_strings"
         }
       ]
     },
-    "requiredBundle": {
+    "required_bundle": {
       "properties": {
         "validation": {
           "title": "Validation",
@@ -288,16 +288,16 @@
         "errors": {
           "title": "Errors",
           "description": "Strings to override for default error messages",
-          "role": "errorStrings",
+          "role": "error_strings",
           "properties": {
             "required": {
-              "$ref": "#/definitions/errorsRequired"
+              "$ref": "#/definitions/errors_required"
             }
           }
         }
       }
     },
-    "uploadBundle": {
+    "upload_bundle": {
       "properties": {
         "validation": {
           "title": "Validation",
@@ -312,7 +312,7 @@
                 "type": "string"
               }
             },
-            "maxSize": {
+            "max_size": {
               "title": "Maximum size",
               "description": "Maximum file size as human readable string or bytes",
               "type": "string"
@@ -322,27 +322,27 @@
         "errors": {
           "title": "Errors",
           "description": "Strings to override for default error messages",
-          "role": "errorStrings",
+          "role": "error_strings",
           "properties": {
             "accept": {
-              "$ref": "#/definitions/errorsAccept"
+              "$ref": "#/definitions/errors_accept"
             },
             "maxSize": {
-              "$ref": "#/definitions/errorsMaxSize"
+              "$ref": "#/definitions/errors_max_size"
             }
           }
         }
       }
     },
-    "stringBundle": {
+    "string_bundle": {
       "properties": {
         "validation": {
           "properties": {
-            "minLength": {
-              "$ref": "#/definitions/minLength"
+            "min_length": {
+              "$ref": "#/definitions/min_length"
             },
-            "maxLength": {
-              "$ref": "#/definitions/maxLength"
+            "max_length": {
+              "$ref": "#/definitions/max_length"
             },
             "pattern": {
               "$ref": "#/definitions/pattern"
@@ -354,95 +354,95 @@
         },
         "errors": {
           "properties": {
-            "minLength": {
-              "$ref": "#/definitions/errorsMinLength"
+            "min_length": {
+              "$ref": "#/definitions/errors_min_length"
             },
-            "maxLength": {
-              "$ref": "#/definitions/errorsMaxLength"
+            "max_length": {
+              "$ref": "#/definitions/errors_max_length"
             },
             "pattern": {
-              "$ref": "#/definitions/errorsPattern"
+              "$ref": "#/definitions/errors_pattern"
             },
             "format": {
-              "$ref": "#/definitions/errorsFormat"
+              "$ref": "#/definitions/errors_format"
             }
           }
         }
       }
     },
-    "numberBundle": {
+    "number_bundle": {
       "properties": {
         "validation": {
           "properties": {
-            "multipleOf": {
-              "$ref": "#/definitions/multipleOf"
+            "multiple_of": {
+              "$ref": "#/definitions/multiple_of"
             },
             "maximum": {
               "$ref": "#/definitions/maximum"
             },
-            "exclusiveMaximum": {
-              "$ref": "#/definitions/exclusiveMaximum"
+            "exclusive_maximum": {
+              "$ref": "#/definitions/exclusive_maximum"
             },
             "minimum": {
               "$ref": "#/definitions/minimum"
             },
-            "exclusiveMinimum": {
-              "$ref": "#/definitions/exclusiveMinimum"
+            "exclusive_minimum": {
+              "$ref": "#/definitions/exclusive_minimum"
             }
           }
         },
         "errors": {
           "properties": {
-            "multipleOf": {
-              "$ref": "#/definitions/errorsMultipleOf"
+            "multiple_of": {
+              "$ref": "#/definitions/errors_multiple_of"
             },
             "maximum": {
-              "$ref": "#/definitions/errorsMaximum"
+              "$ref": "#/definitions/errors_maximum"
             },
-            "exclusiveMaximum": {
-              "$ref": "#/definitions/errorsExclusiveMaximum"
+            "exclusive_maximum": {
+              "$ref": "#/definitions/errors_exclusive_maximum"
             },
             "minimum": {
-              "$ref": "#/definitions/errorsMinimum"
+              "$ref": "#/definitions/errors_minimum"
             },
-            "exclusiveMinimum": {
-              "$ref": "#/definitions/errorsExclusiveMinimum"
+            "exclusive_minimum": {
+              "$ref": "#/definitions/errors_exclusive_minimum"
             }
           }
         }
       }
     },
-    "dateBundle": {
+    "date_bundle": {
       "properties": {
         "validation": {
           "properties": {
-            "dateBefore": {
-              "$ref": "#/definitions/dateBefore"
+            "date_before": {
+              "$ref": "#/definitions/date_before"
             },
-            "dateAfter": {
-              "$ref": "#/definitions/dateAfter"
+            "date_after": {
+              "$ref": "#/definitions/date_after"
             },
-            "dateWithinNext": {
-              "$ref": "#/definitions/dateWithinNext"
+            "date_within_next": {
+              "$ref": "#/definitions/date_within_next"
             },
-            "dateWithinLast": {
-              "$ref": "#/definitions/dateWithinLast"
+            "date_within_last": {
+              "$ref": "#/definitions/date_within_last"
             }
           }
         },
         "errors": {
           "properties": {
-            "dateBefore": {
-              "$ref": "#/definitions/errorsDateBefore"
+            "date_before": {
+              "$ref": "#/definitions/errors_date_before"
             },
-            "dateAfter": {
-              "$ref": "#/definitions/errorsDateAfter"
+            "date_after": {
+              "$ref": "#/definitions/errors_date_after"
             },
-            "dateWithinNext": {
-              "$ref": "#/definitions/errorsDateWithinNext"
+            "date_within_next": {
+              "$ref": "#/definitions/errors_date_within_next"
             },
-            "dateWithinLast": {
-              "$ref": "#/definitions/errorsDateWithinLast"
+            "date_within_last": {
+              "$ref": "#/definitions/errors_date_within_last"
             }
           }
         }

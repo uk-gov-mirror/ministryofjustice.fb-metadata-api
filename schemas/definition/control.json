@@ -7,7 +7,7 @@
       "$ref": "../definition/component.json"
     },
     {
-      "$ref": "../definition/htmlattributes"
+      "$ref": "../definition/html_attributes"
     },
     {
       "$ref": "../definition/namespace"
@@ -60,7 +60,7 @@
       "description": "Whether the control should be disabled",
       "oneOf": [
         {
-          "$ref": "http://gov.uk/schema/v1.0.0/definition/conditional/boolean"
+          "$ref": "../definition/conditional.boolean.json"
         }
       ],
       "default": false,

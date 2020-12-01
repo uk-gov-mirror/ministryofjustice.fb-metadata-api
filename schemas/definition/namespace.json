@@ -12,7 +12,7 @@
         "userinput"
       ]
     },
-    "namespaceProtect": {
+    "namespace_protect": {
       "title": "Namespace protection",
       "description": "Whether to prevent the component’s namespace being overridden or appended",
       "type": "boolean",

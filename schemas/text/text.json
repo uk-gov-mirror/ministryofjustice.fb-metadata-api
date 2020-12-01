@@ -14,10 +14,10 @@
       "$ref": "../definition/field.json"
     },
     {
-      "$ref": "../validations#/definitions/stringBundle"
+      "$ref": "../validations#/definitions/string_bundle"
     },
     {
-      "$ref": "../definition/widthclass/input.json"
+      "$ref": "../definition/width_class.input.json"
     }
   ]
 }
