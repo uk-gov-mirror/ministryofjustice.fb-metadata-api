@@ -4,8 +4,15 @@ end
 class ValidateSchema
   class << self
     def before(controller)
+      return unless controller.request.post?
+
       schema = "request.#{controller.request.params['controller']}"
       validate(controller.request.params, schema)
+    rescue JSON::Schema::ValidationError, JSON::Schema::SchemaError, SchemaNotFoundError => e
+      controller.render(
+        json: ErrorsSerializer.new(message: e.message).attributes,
+        status: :unprocessable_entity
+      )
     end
 
     def validate(metadata, schema)
