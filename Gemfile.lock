@@ -112,7 +112,7 @@ GEM
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     pg (1.2.3)
-    puma (5.0.4)
+    puma (5.1.0)
       nio4r (~> 2.0)
     rack (2.2.3)
     rack-test (1.1.0)
@@ -200,7 +200,7 @@ DEPENDENCIES
   fb-jwt-auth (~> 0.3.0)
   httparty
   pg (>= 0.18, < 2.0)
-  puma (~> 5.0)
+  puma (~> 5.1)
   rails (~> 6.0.2, >= 6.0.2.1)
   rspec-rails
   sentry-raven
