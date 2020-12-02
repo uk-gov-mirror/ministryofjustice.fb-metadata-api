@@ -82,7 +82,7 @@
   },
   "allOf": [
     {
-      "$ref": "../definition/data.json"
+      "$ref": "definition.data"
     }
   ],
   "category": [

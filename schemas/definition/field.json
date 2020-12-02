@@ -4,16 +4,16 @@
   "title": "Field definition",
   "allOf": [
     {
-      "$ref": "../definition/label.json"
+      "$ref": "definition.label"
     },
     {
-      "$ref": "../definition/control.json"
+      "$ref": "definition.control"
     },
     {
-      "$ref": "../definition/repeatable.json"
+      "$ref": "definition.repeatable"
     },
     {
-      "$ref": "../definition/name.json"
+      "$ref": "definition.name"
     }
   ],
   "required": [

@@ -6,7 +6,7 @@
   "type": "object",
   "properties": {
     "metadata": {
-      "$ref": "schemas/service/base.json"
+      "$ref": "service.base"
     }
   },
   "required": ["metadata"]

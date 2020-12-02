@@ -63,7 +63,7 @@
   },
   "allOf": [
     {
-      "$ref": "../definition/namespace.json"
+      "$ref": "definition.namespace"
     }
   ],
   "category": [

@@ -4,16 +4,16 @@
   "title": "Control definition",
   "allOf": [
     {
-      "$ref": "../definition/component.json"
+      "$ref": "definition.component"
     },
     {
-      "$ref": "../definition/html_attributes"
+      "$ref": "definition.html_attributes"
     },
     {
-      "$ref": "../definition/namespace"
+      "$ref": "definition.namespace"
     },
     {
-      "$ref": "http://gov.uk/schema/v1.0.0/validations#/definitions/requiredBundle"
+      "$ref": "validations#/definitions/required_bundle"
     }
   ],
   "properties": {
@@ -60,7 +60,7 @@
       "description": "Whether the control should be disabled",
       "oneOf": [
         {
-          "$ref": "../definition/conditional.boolean.json"
+          "$ref": "definition.conditional.boolean"
         }
       ],
       "default": false,

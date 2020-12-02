@@ -21,10 +21,10 @@
       "type": "string"
     },
     "locale": {
-      "$ref": "../service/locale.json"
+      "$ref": "service.locale"
     },
     "configuration": {
-      "$ref": "../config/service.json"
+      "$ref": "config.service"
     },
     "pages": {
       "type": "array",

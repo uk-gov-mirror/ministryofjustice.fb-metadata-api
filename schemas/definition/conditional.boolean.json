@@ -11,7 +11,7 @@
       "type": "boolean"
     },
     {
-      "$ref": "../condition/base.json"
+      "$ref": "condition.base"
     }
   ],
   "category": [
