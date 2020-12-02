@@ -23,6 +23,7 @@ class ApplicationController < ActionController::API
   end
 
   before_action AuthenticateApplication
+  before_action ValidateSchema
 
   def not_found
     render json: ErrorsSerializer.new(

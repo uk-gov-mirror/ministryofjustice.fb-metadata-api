@@ -12,6 +12,7 @@ RSpec.describe 'POST /services/:id/versions' do
       {
         "metadata": {
           "service_name": "Service Name",
+          "service_id": service.id,
           "created_by": "4634ec01-5618-45ec-a4e2-bb5aa587e751",
           "configuration": {
              "_id": "service",
@@ -99,12 +100,10 @@ RSpec.describe 'POST /services/:id/versions' do
     end
 
     it 'returns error messages' do
-      expect(response_body['message']).to eq(
-        [
-          "Metadata created by can't be blank",
-          "Name can't be blank",
-          "Created by can't be blank"
-        ]
+      expect(
+        response_body['message']
+      ).to eq(
+        ["The property '#/metadata' did not contain a required property of 'service_id'"]
       )
     end
   end

@@ -23,7 +23,10 @@ RSpec.describe 'API integration tests' do
     {
       "service_name": "Service Name",
       "created_by": "4634ec01-5618-45ec-a4e2-bb5aa587e751",
-      "configuration": {},
+      "configuration": {
+        "_id": "service",
+        "_type": "config.service"
+      },
       "pages": [],
       "locale": "en"
     }
@@ -62,7 +65,10 @@ RSpec.describe 'API integration tests' do
             "service_id": service_id,
             "version_id": version_id,
             "created_by": "4634ec01-5618-45ec-a4e2-bb5aa587e751",
-            "configuration": {},
+            "configuration": {
+              "_id": "service",
+              "_type": "config.service"
+            },
             "pages": [],
             "locale": "en"
           }
@@ -226,37 +232,33 @@ RSpec.describe 'API integration tests' do
     end
 
     context 'when not passing required metadata attributes' do
-      let(:error_message) do
-        [
-          "Metadata locale can't be blank",
-          "Metadata data can't be blank",
-          "Metadata created by can't be blank",
-          "Name can't be blank",
-          "Created by can't be blank"
-        ]
-      end
-
       it 'returns unprocessable entity with a message for create service' do
-        response = metadata_api_test_client.create_service(body: {}, authorisation_headers: authorisation_headers)
+        response = metadata_api_test_client.create_service(
+          body: { "metadata": {} }.to_json,
+          authorisation_headers: authorisation_headers
+        )
 
         expect(response.code).to be(422)
-        expect(parse_response(response)[:message]).to match_array(error_message)
+        expect(
+          parse_response(response)[:message]
+        ).to match_array(
+          ["The property '#/metadata' did not contain a required property of 'service_name'"]
+        )
       end
 
       it 'returns unprocessable entity with a message for new version service' do
-        new_service = metadata_api_test_client.create_service(
-          body: request_body,
-          authorisation_headers: authorisation_headers
-        )
-
         response = metadata_api_test_client.new_version(
-          service_id: parse_response(new_service)[:service_id],
-          body: {},
+          service_id: '4634ec01-5618-45ec-a4e2-bb5aa587e751',
+          body: { "metadata": {} }.to_json,
           authorisation_headers: authorisation_headers
         )
 
         expect(response.code).to be(422)
-        expect(parse_response(response)[:message]).to match_array(error_message)
+        expect(
+          parse_response(response)[:message]
+        ).to match_array(
+          ["The property '#/metadata' did not contain a required property of 'service_id'"]
+        )
       end
     end
   end

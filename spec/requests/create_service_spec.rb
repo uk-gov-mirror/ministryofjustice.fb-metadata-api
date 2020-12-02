@@ -1,7 +1,7 @@
 RSpec.describe 'POST /services', type: :request do
   include_examples 'application authentication' do
     let(:action) do
-      post '/services', params: {}, as: :json
+      post '/services', params: params, as: :json
     end
   end
   let(:response_body) { JSON.parse(response.body) }
@@ -75,7 +75,12 @@ RSpec.describe 'POST /services', type: :request do
       {
         metadata: {
           service_name: 'Service Name',
-          created_by: '4634ec01-5618-45ec-a4e2-bb5aa587e751'
+          created_by: '4634ec01-5618-45ec-a4e2-bb5aa587e751',
+          configuration: {
+            "_id": "service",
+            "_type": "config.service"
+          },
+          pages: []
         }
       }
     end
@@ -91,12 +96,17 @@ RSpec.describe 'POST /services', type: :request do
         metadata: {
           service_name: 'Helo Byd',
           created_by: '4634ec01-5618-45ec-a4e2-bb5aa587e751',
+          configuration: {
+            "_id": "service",
+            "_type": "config.service"
+          },
+          pages: [],
           locale: 'cy'
         }
       }
     end
 
-    it 'should set en as the default' do
+    it 'should set the locale correctly' do
       expect(response_body['locale']).to eq('cy')
     end
   end
@@ -110,14 +120,10 @@ RSpec.describe 'POST /services', type: :request do
     end
 
     it 'returns error message' do
-      expect(response_body['message']).to match_array(
-        [
-          "Metadata locale can't be blank",
-          "Metadata data can't be blank",
-          "Metadata created by can't be blank",
-          "Name can't be blank",
-          "Created by can't be blank"
-        ]
+      expect(
+        response_body['message']
+      ).to match_array(
+        ["The property '#/' did not contain a required property of 'metadata'"]
       )
     end
   end

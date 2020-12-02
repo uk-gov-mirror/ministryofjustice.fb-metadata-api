@@ -1,0 +1,13 @@
+{
+  "$id": "http://gov.uk/schema/v1.0.0/request/versions/create",
+  "_name": "request.versions.create",
+  "title": "Create new service version",
+  "description": "Request schema for creating a new version of a service",
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "$ref": "schemas/service/base.json"
+    }
+  },
+  "required": ["metadata"]
+}
