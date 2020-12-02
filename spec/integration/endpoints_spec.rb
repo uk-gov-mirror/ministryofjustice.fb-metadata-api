@@ -20,16 +20,14 @@ RSpec.describe 'API integration tests' do
     { Authorization: "Bearer #{access_token}" }
   end
   let(:service) do
-    {
-      "service_name": "Service Name",
-      "created_by": "4634ec01-5618-45ec-a4e2-bb5aa587e751",
-      "configuration": {
-        "_id": "service",
-        "_type": "config.service"
-      },
-      "pages": [],
-      "locale": "en"
-    }
+    JSON.parse(
+      File.read(Rails.root.join('spec', 'fixtures', 'service.json'))
+    ).deep_symbolize_keys
+  end
+  let(:version) do
+    JSON.parse(
+      File.read(Rails.root.join('spec', 'fixtures', 'version.json'))
+    ).deep_symbolize_keys
   end
   let(:request_body) { { "metadata": service }.to_json }
 
@@ -41,7 +39,7 @@ RSpec.describe 'API integration tests' do
     context 'when a new service is created' do
       it 'we can request a specific version' do
         response = metadata_api_test_client.create_service(
-          body: request_body,
+          body: { "metadata": service }.to_json,
           authorisation_headers: authorisation_headers
         )
 
@@ -60,18 +58,7 @@ RSpec.describe 'API integration tests' do
         metadata = parse_response(response)
         expect(response.code).to be(200)
         expect(metadata).to include(
-          {
-            "service_name": "Service Name",
-            "service_id": service_id,
-            "version_id": version_id,
-            "created_by": "4634ec01-5618-45ec-a4e2-bb5aa587e751",
-            "configuration": {
-              "_id": "service",
-              "_type": "config.service"
-            },
-            "pages": [],
-            "locale": "en"
-          }
+          service.merge({ service_id: service_id, version_id: version_id })
         )
       end
     end
@@ -84,14 +71,7 @@ RSpec.describe 'API integration tests' do
         )
         metadata = parse_response(response)
 
-        pages = [
-          {
-            "_id": "page.start",
-            "_type": "page.start",
-            "url": "/"
-          }
-        ]
-        updated_payload = { "metadata": metadata.merge("pages": pages) }
+        updated_payload = { "metadata": version.merge(service_id: metadata[:service_id]) }
         response = metadata_api_test_client.new_version(
           service_id: metadata[:service_id],
           body: updated_payload.to_json,
@@ -100,7 +80,7 @@ RSpec.describe 'API integration tests' do
 
         updated_metadata = parse_response(response)
         expect(response.code).to be(201)
-        expect(updated_metadata).to include(pages: pages)
+        expect(updated_metadata).to include(pages: version[:pages])
       end
     end
 
