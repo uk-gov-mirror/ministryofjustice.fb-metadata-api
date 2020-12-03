@@ -15,10 +15,10 @@
           "type": "string"
         },
         "configuration": {
-          "$ref": "schemas/config/service.json"
+          "$ref": "config.service"
         },
         "locale": {
-          "$ref": "schemas/service/locale.json"
+          "$ref": "service.locale"
         },
         "pages": {
           "type": "array",
