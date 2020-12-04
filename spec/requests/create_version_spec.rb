@@ -11,6 +11,8 @@ RSpec.describe 'POST /services/:id/versions' do
     let(:params) do
       {
         "metadata": {
+          "_id": "service.base",
+          "_type": "service.base",
           "service_name": "Service Name",
           "service_id": service.id,
           "created_by": "4634ec01-5618-45ec-a4e2-bb5aa587e751",
@@ -103,7 +105,7 @@ RSpec.describe 'POST /services/:id/versions' do
       expect(
         response_body['message']
       ).to eq(
-        ["The property '#/metadata' did not contain a required property of 'service_id'"]
+        ["The property '#/metadata' did not contain a required property of '_id'"]
       )
     end
   end

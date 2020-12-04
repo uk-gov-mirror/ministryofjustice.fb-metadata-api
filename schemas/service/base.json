@@ -5,6 +5,12 @@
   "description": "Base schema for a service",
   "type": "object",
   "properties": {
+    "_id": {
+      "const": "service.base"
+    },
+    "_type": {
+      "const": "service.base"
+    },
     "service_id": {
       "type": "string"
     },
@@ -34,6 +40,8 @@
     }
   },
   "required": [
+    "_id",
+    "_type",
     "service_id",
     "service_name",
     "created_by",
