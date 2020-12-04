@@ -222,7 +222,7 @@ RSpec.describe 'API integration tests' do
         expect(
           parse_response(response)[:message]
         ).to match_array(
-          ["The property '#/metadata' did not contain a required property of 'service_name'"]
+          ["The property '#/metadata' did not contain a required property of '_id'"]
         )
       end
 
@@ -237,7 +237,7 @@ RSpec.describe 'API integration tests' do
         expect(
           parse_response(response)[:message]
         ).to match_array(
-          ["The property '#/metadata' did not contain a required property of 'service_id'"]
+          ["The property '#/metadata' did not contain a required property of '_id'"]
         )
       end
     end

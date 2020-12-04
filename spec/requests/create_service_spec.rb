@@ -15,6 +15,8 @@ RSpec.describe 'POST /services', type: :request do
     let(:params) do
       {
         "metadata": {
+          "_id": "service.base",
+          "_type": "service.base",
           "service_name": "Service Name",
           "created_by": "4634ec01-5618-45ec-a4e2-bb5aa587e751",
           "configuration": {
@@ -39,6 +41,8 @@ RSpec.describe 'POST /services', type: :request do
 
     it 'returns service representation' do
       expected = {
+        "_id" => "service.base",
+        "_type" => "service.base",
         "service_name" => "Service Name",
         "created_by" => "4634ec01-5618-45ec-a4e2-bb5aa587e751",
         "configuration" => {
@@ -74,6 +78,8 @@ RSpec.describe 'POST /services', type: :request do
     let(:params) do
       {
         metadata: {
+          "_id": 'service.base',
+          "_type": 'service.base',
           service_name: 'Service Name',
           created_by: '4634ec01-5618-45ec-a4e2-bb5aa587e751',
           configuration: {
@@ -94,11 +100,13 @@ RSpec.describe 'POST /services', type: :request do
     let(:params) do
       {
         metadata: {
+          "_id": 'service.base',
+          "_type": 'service.base',
           service_name: 'Helo Byd',
           created_by: '4634ec01-5618-45ec-a4e2-bb5aa587e751',
           configuration: {
-            "_id": "service",
-            "_type": "config.service"
+            "_id": 'config.service',
+            "_type": 'config.service'
           },
           pages: [],
           locale: 'cy'

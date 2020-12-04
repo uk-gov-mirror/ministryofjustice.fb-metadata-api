@@ -6,10 +6,25 @@
   "type": "object",
   "properties": {
     "_id": {
-      "const": "service"
+      "const": "config.service"
     },
     "_type": {
       "const": "config.service"
+    },
+    "homepage_url": {
+      "title": "Homepage URL",
+      "description": "The Homepage URL of the service",
+      "type": "string"
+    },
+    "service_email_address": {
+      "title": "Service Email Address",
+      "description": "The email address of the service",
+      "type": "string"
+    },
+    "service_url": {
+      "title": "Service URL",
+      "description": "The URL of the first page of the service",
+      "type": "string"
     },
     "phase": {
       "title": "Form phase",
