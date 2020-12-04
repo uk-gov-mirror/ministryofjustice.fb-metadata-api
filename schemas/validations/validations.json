@@ -32,7 +32,7 @@
       "description": "Whether the user must answer a question",
       "oneOf": [
         {
-          "$ref": "../definition/conditional.boolean.json"
+          "$ref": "definition.conditional.boolean"
         }
       ],
       "default": true

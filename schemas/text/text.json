@@ -11,13 +11,13 @@
   },
   "allOf": [
     {
-      "$ref": "../definition/field.json"
+      "$ref": "definition.field"
     },
     {
-      "$ref": "../validations#/definitions/string_bundle"
+      "$ref": "validations#/definitions/string_bundle"
     },
     {
-      "$ref": "../definition/width_class.input.json"
+      "$ref": "definition.width_class.input"
     }
   ]
 }

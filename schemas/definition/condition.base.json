@@ -7,7 +7,7 @@
       "title": "Identifier",
       "type": "string"
     },
-    "identifierType": {
+    "identifier_type": {
       "title": "Identifier type",
       "type": "string",
       "enum": [

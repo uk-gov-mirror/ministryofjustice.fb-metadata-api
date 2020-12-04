@@ -155,7 +155,7 @@ RSpec.describe 'API integration tests' do
           authorisation_headers: authorisation_headers
         ))[:services]
 
-        expect(services_for_user).to eq(services.flatten)
+        expect(services_for_user).to match_array(services.flatten)
       end
     end
 
