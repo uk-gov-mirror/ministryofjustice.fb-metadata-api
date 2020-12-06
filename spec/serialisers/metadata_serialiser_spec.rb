@@ -1,6 +1,6 @@
 RSpec.describe MetadataSerialiser do
   let(:service_metadata) do
-    JSON.parse(File.read(Rails.root.join('spec', 'fixtures', 'service.json')))
+    JSON.parse(File.read(fixtures_directory.join('service.json')))
   end
   let(:service_params) do
     {
