@@ -5,6 +5,11 @@ RSpec.describe 'POST /services', type: :request do
     end
   end
   let(:response_body) { JSON.parse(response.body) }
+  let(:service) do
+    JSON.parse(
+      File.read(fixtures_directory.join('service.json'))
+    ).deep_symbolize_keys
+  end
 
   before do
     allow_any_instance_of(Fb::Jwt::Auth).to receive(:verify!).and_return(true)
@@ -12,53 +17,14 @@ RSpec.describe 'POST /services', type: :request do
   end
 
   context 'when valid attributes' do
-    let(:params) do
-      {
-        "metadata": {
-          "_id": "service.base",
-          "_type": "service.base",
-          "service_name": "Service Name",
-          "created_by": "4634ec01-5618-45ec-a4e2-bb5aa587e751",
-          "configuration": {
-             "_id": "service",
-             "_type": "config.service"
-           },
-          "pages": [
-            {
-              "_id": "page.start",
-              "_type": "page.start",
-              "url": "/"
-            }
-          ],
-          "locale": "en"
-        }
-      }
-    end
+    let(:params) { { metadata: service } }
 
     it 'returns created status' do
       expect(response.status).to be(201)
     end
 
     it 'returns service representation' do
-      expected = {
-        "_id" => "service.base",
-        "_type" => "service.base",
-        "service_name" => "Service Name",
-        "created_by" => "4634ec01-5618-45ec-a4e2-bb5aa587e751",
-        "configuration" => {
-          "_id" => "service",
-          "_type" => "config.service"
-        },
-        "pages" => [
-          {
-            "_id" => "page.start",
-            "_type" => "page.start",
-            "url" => "/"
-          }
-        ],
-        "locale" => "en"
-      }
-      expect(response_body).to include(expected)
+      expect(response_body.deep_symbolize_keys).to include(service)
     end
 
     it 'returns service id' do
@@ -75,21 +41,7 @@ RSpec.describe 'POST /services', type: :request do
   end
 
   context 'when no locale is in the metadata' do
-    let(:params) do
-      {
-        metadata: {
-          "_id": 'service.base',
-          "_type": 'service.base',
-          service_name: 'Service Name',
-          created_by: '4634ec01-5618-45ec-a4e2-bb5aa587e751',
-          configuration: {
-            "_id": "service",
-            "_type": "config.service"
-          },
-          pages: []
-        }
-      }
-    end
+    let(:params) { { metadata: service.reject { |k, _| k == :locale } } }
 
     it 'should set en as the default' do
       expect(response_body['locale']).to eq('en')
@@ -97,22 +49,7 @@ RSpec.describe 'POST /services', type: :request do
   end
 
   context 'when a locale is in the metadata' do
-    let(:params) do
-      {
-        metadata: {
-          "_id": 'service.base',
-          "_type": 'service.base',
-          service_name: 'Helo Byd',
-          created_by: '4634ec01-5618-45ec-a4e2-bb5aa587e751',
-          configuration: {
-            "_id": 'config.service',
-            "_type": 'config.service'
-          },
-          pages: [],
-          locale: 'cy'
-        }
-      }
-    end
+    let(:params) { { metadata: service.merge(locale: 'cy') } }
 
     it 'should set the locale correctly' do
       expect(response_body['locale']).to eq('cy')

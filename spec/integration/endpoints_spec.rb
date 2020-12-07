@@ -21,12 +21,12 @@ RSpec.describe 'API integration tests' do
   end
   let(:service) do
     JSON.parse(
-      File.read(Rails.root.join('spec', 'fixtures', 'service.json'))
+      File.read(fixtures_directory.join('service.json'))
     ).deep_symbolize_keys
   end
   let(:version) do
     JSON.parse(
-      File.read(Rails.root.join('spec', 'fixtures', 'version.json'))
+      File.read(fixtures_directory.join('version.json'))
     ).deep_symbolize_keys
   end
   let(:request_body) { { "metadata": service }.to_json }

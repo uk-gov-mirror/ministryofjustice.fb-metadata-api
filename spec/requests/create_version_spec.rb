@@ -6,96 +6,26 @@ RSpec.describe 'POST /services/:id/versions' do
     allow_any_instance_of(Fb::Jwt::Auth).to receive(:verify!).and_return(true)
     post "/services/#{service.id}/versions", params: params, as: :json
   end
+  let(:version) do
+    JSON.parse(
+      File.read(fixtures_directory.join('version.json'))
+    ).merge(service_id: service.id).deep_symbolize_keys
+  end
 
   context 'when valid attributes' do
-    let(:params) do
-      {
-        "metadata": {
-          "_id": "service.base",
-          "_type": "service.base",
-          "service_name": "Service Name",
-          "service_id": service.id,
-          "created_by": "4634ec01-5618-45ec-a4e2-bb5aa587e751",
-          "configuration": {
-             "_id": "service",
-             "_type": "config.service"
-           },
-          "pages": [
-            {
-              "_id": "page.start",
-              "_type": "page.start",
-              "url": "/"
-            },
-            {
-              "_id": "page.upload-cop1a",
-              "_type": "page.singlequestion",
-              "components": [
-                {
-                  "_id": "page.upload-cop1a--upload.auto_name__1",
-                  "_type": "upload",
-                 "errors": {},
-                  "hint": "",
-                  "label": "Upload your completed supporting information (COP1A)",
-                  "name": "upload-cop1a"
-                }
-              ],
-              "steps": [
-                "page.upload-cop1a-check"
-              ],
-              "url": "upload-cop1a"
-            },
-          ],
-          "locale": "en"
-        }
-      }
-    end
+    let(:params) { { metadata: version } }
 
     it 'returns created status' do
       expect(response.status).to be(201)
     end
 
     it 'returns the metadata' do
-      expected = {
-        "service_id" => service.id,
-        "service_name" => "Service Name",
-        "created_by" => "4634ec01-5618-45ec-a4e2-bb5aa587e751",
-        "configuration" => {
-           "_id" => "service",
-           "_type" => "config.service"
-         },
-        "pages" => [
-          {
-            "_id" => "page.start",
-            "_type" => "page.start",
-            "url" => "/"
-          },
-          {
-            "_id" => "page.upload-cop1a",
-            "_type" => "page.singlequestion",
-            "components" => [
-              {
-                "_id" => "page.upload-cop1a--upload.auto_name__1",
-                "_type" => "upload",
-               "errors" => {},
-                "hint" => "",
-                "label" => "Upload your completed supporting information (COP1A)",
-                "name" => "upload-cop1a"
-              }
-            ],
-            "steps" => [
-              "page.upload-cop1a-check"
-            ],
-            "url" => "upload-cop1a"
-          },
-        ],
-        "locale" => "en"
-      }
-      expect(response_body).to include(expected)
+      expect(response_body.deep_symbolize_keys).to include(version)
     end
   end
 
   context 'when invalid attributes' do
-    let(:params) { { metadata: {'foo': 'bar'}} }
+    let(:params) { { metadata: { 'foo': 'bar' } } }
 
     it 'returns unprocessable entity' do
       expect(response.status).to be(422)
