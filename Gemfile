@@ -8,7 +8,7 @@ gem 'fb-jwt-auth', '~> 0.3.0'
 gem 'metadata_presenter', github: 'ministryofjustice/fb-metadata-presenter', branch: 'main'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 5.1'
-gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
+gem 'rails', '~> 6.1.0'
 gem 'sentry-raven'
 gem 'tzinfo-data'
 
