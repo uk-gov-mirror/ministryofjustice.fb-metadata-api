@@ -19,7 +19,7 @@ class ApplicationController < ActionController::API
   rescue_from(*FB_JWT_EXCEPTIONS) do |exception|
     render json: ErrorsSerializer.new(
       message: exception.message
-    ).attributes, status: :unauthorized
+    ).attributes, status: :forbidden
   end
 
   before_action AuthenticateApplication

@@ -28,8 +28,8 @@ RSpec.shared_examples 'application authentication' do
       action
     end
 
-    it 'returns unauthorised' do
-      expect(response.status).to be(401)
+    it 'returns forbidden' do
+      expect(response.status).to be(403)
     end
 
     it 'returns response body' do
@@ -45,8 +45,8 @@ RSpec.shared_examples 'application authentication' do
       action
     end
 
-    it 'returns unauthorised' do
-      expect(response.status).to be(401)
+    it 'returns forbidden' do
+      expect(response.status).to be(403)
     end
 
     it 'returns response body' do
@@ -62,8 +62,8 @@ RSpec.shared_examples 'application authentication' do
       action
     end
 
-    it 'returns unauthorised' do
-      expect(response.status).to be(401)
+    it 'returns forbidden' do
+      expect(response.status).to be(403)
     end
 
     it 'returns response body' do
@@ -79,8 +79,8 @@ RSpec.shared_examples 'application authentication' do
       action
     end
 
-    it 'returns unauthorised' do
-      expect(response.status).to be(401)
+    it 'returns forbidden' do
+      expect(response.status).to be(403)
     end
 
     it 'returns response body' do
@@ -96,8 +96,8 @@ RSpec.shared_examples 'application authentication' do
       action
     end
 
-    it 'returns unauthorised' do
-      expect(response.status).to be(401)
+    it 'returns forbidden' do
+      expect(response.status).to be(403)
     end
 
     it 'returns response body' do

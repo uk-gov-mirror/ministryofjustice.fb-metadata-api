@@ -244,10 +244,10 @@ RSpec.describe 'API integration tests' do
   end
 
   context 'when not passing authorisation token' do
-    it 'returns an unauthorised response with token not present message ' do
+    it 'returns a forbidden response with token not present message ' do
       response = metadata_api_test_client.create_service(body: {}, authorisation_headers: {})
 
-      expect(response.code).to be(401)
+      expect(response.code).to be(403)
       expect(parse_response(response)[:message]).to match_array(['Token is not present'])
     end
   end
@@ -257,13 +257,13 @@ RSpec.describe 'API integration tests' do
       { namespace: 'awesome-namespace', iat: Time.now.to_i }
     end
 
-    it 'returns 401 with issuer not present message' do
+    it 'returns 403 with issuer not present message' do
       response = metadata_api_test_client.create_service(
         body: request_body,
         authorisation_headers: authorisation_headers
       )
 
-      expect(response.code).to be(401)
+      expect(response.code).to be(403)
       expect(
         parse_response(response)[:message]
       ).to match_array(['Issuer is not present in the token'])
@@ -275,13 +275,13 @@ RSpec.describe 'API integration tests' do
       { iss: 'integration-tests', iat: Time.now.to_i }
     end
 
-    it 'returns 401 with namespace not present message' do
+    it 'returns 403 with namespace not present message' do
       response = metadata_api_test_client.create_service(
         body: request_body,
         authorisation_headers: authorisation_headers
       )
 
-      expect(response.code).to be(401)
+      expect(response.code).to be(403)
       expect(
         parse_response(response)[:message]
       ).to match_array(['Namespace is not present in the token'])
@@ -297,13 +297,13 @@ RSpec.describe 'API integration tests' do
       }
     end
 
-    it 'returns 401 with a token has expired message' do
+    it 'returns 403 with a token has expired message' do
       response = metadata_api_test_client.create_service(
         body: request_body,
         authorisation_headers: authorisation_headers
       )
 
-      expect(response.code).to be(401)
+      expect(response.code).to be(403)
       expect(
         parse_response(response)[:message]
       ).to match_array(['Token has expired: iat skew is -86400, max is 60'])
