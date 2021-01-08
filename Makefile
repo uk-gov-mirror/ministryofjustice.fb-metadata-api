@@ -6,7 +6,7 @@ build:
 	$(DOCKER_COMPOSE) up -d --build metadata-app
 
 .PHONY: spec
-spec: seed_public_key build
+spec: setup
 	$(DOCKER_COMPOSE) run --rm  metadata-app bundle exec rspec
 
 .PHONY: all_units
@@ -24,9 +24,17 @@ seed_public_key:
 	ruby ./scripts/seed_test_public_key.rb
 
 .PHONY: integration
-integration: seed_public_key build
+integration: setup
 	$(DOCKER_COMPOSE) run --rm metadata-app bundle exec rspec spec/integration/*_spec.rb
 
-load-test-local: seed_public_key build
+.PHONY: load-test-local
+load-test-local: setup
 	./bin/wait-for-metadata-app
 	cat spec/fixtures/private.pem | base64 | xargs ./bin/load-test
+
+.PHONY: setup
+setup: seed_public_key build
+
+.PHONY: get_private_key
+get_private_key: setup
+	cat spec/fixtures/private.pem | base64

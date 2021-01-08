@@ -14,7 +14,7 @@ https://ministryofjustice.github.io/form-builder-metadata-api-docs/
 ## Setup
 
 ```
-  make build
+  make setup
 ```
 
 ## Running specs
