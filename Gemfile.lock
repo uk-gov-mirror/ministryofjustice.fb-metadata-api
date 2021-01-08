@@ -79,7 +79,7 @@ GEM
     faraday (1.1.0)
       multipart-post (>= 1.2, < 3)
       ruby2_keywords
-    fb-jwt-auth (0.3.0)
+    fb-jwt-auth (0.4.0)
       activesupport
       json
       jwt
@@ -95,7 +95,7 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.8.7)
       concurrent-ruby (~> 1.0)
-    json (2.3.1)
+    json (2.5.1)
     json-schema (2.8.1)
       addressable (>= 2.4)
     jwt (2.2.2)
@@ -219,7 +219,7 @@ DEPENDENCIES
   brakeman
   byebug
   factory_bot_rails
-  fb-jwt-auth (~> 0.3.0)
+  fb-jwt-auth (~> 0.4.0)
   httparty
   metadata_presenter (~> 0.1.4)
   pg (>= 0.18, < 2.0)
