@@ -40,14 +40,6 @@ RSpec.describe 'POST /services', type: :request do
     end
   end
 
-  context 'when no locale is in the metadata' do
-    let(:params) { { metadata: service.reject { |k, _| k == :locale } } }
-
-    it 'should set en as the default' do
-      expect(response_body['locale']).to eq('en')
-    end
-  end
-
   context 'when a locale is in the metadata' do
     let(:params) { { metadata: service.merge(locale: 'cy') } }
 
@@ -55,7 +47,6 @@ RSpec.describe 'POST /services', type: :request do
       expect(response_body['locale']).to eq('cy')
     end
   end
-
 
   context 'when invalid attributes' do
     let(:params) { {} }
@@ -69,6 +60,22 @@ RSpec.describe 'POST /services', type: :request do
         response_body['message']
       ).to match_array(
         ["The property '#/' did not contain a required property of 'metadata'"]
+      )
+    end
+  end
+
+  context 'when no locale is in the metadata' do
+    let(:params) { { metadata: service.reject { |k, _| k == :locale } } }
+
+    it 'returns unprocessable entity' do
+      expect(response.status).to be(422)
+    end
+
+    it 'returns an error message' do
+      expect(
+        response_body['message']
+      ).to match_array(
+        ["The property '#/metadata' did not contain a required property of 'locale'"]
       )
     end
   end
