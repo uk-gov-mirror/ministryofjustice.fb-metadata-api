@@ -6,6 +6,7 @@ require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
+require 'database_cleaner/active_record'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -37,11 +38,6 @@ RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
-  # If you're not using ActiveRecord, or you'd prefer not to run each of your
-  # examples within a transaction, remove the following line or assign false
-  # instead of true.
-  config.use_transactional_fixtures = true
-
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
 
@@ -59,6 +55,25 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
+
+  config.before(:suite) do
+    DatabaseCleaner.allow_remote_database_url = true
+    DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  # "You may want to combine the before(:each) we just added with the
+  # previous one but DON'T. If you combine them, Database Cleaner will
+  # open a transaction before being set to use truncation, which means
+  # Capybara won’t be able to “see” the test database records."
+  # see https://www.devmynd.com/blog/setting-up-rspec-and-capybara-in-rails-5-for-testing/
+  config.before do
+    DatabaseCleaner.start
+  end
+
+  config.after do
+    DatabaseCleaner.clean
+  end
 
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!

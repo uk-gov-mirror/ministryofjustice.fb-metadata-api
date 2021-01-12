@@ -64,6 +64,25 @@ RSpec.describe 'POST /services', type: :request do
     end
   end
 
+  context 'when form name already exists' do
+    let(:params) { { metadata: service } }
+    before do
+      post '/services', params: params, as: :json
+    end
+
+    it 'returns unprocessable entity' do
+      expect(response.status).to be(422)
+    end
+
+    it 'returns an error message' do
+      expect(
+        response_body['message']
+      ).to match_array(
+        ["Name has already been taken"]
+      )
+    end
+  end
+
   context 'when no locale is in the metadata' do
     let(:params) { { metadata: service.reject { |k, _| k == :locale } } }
 

@@ -134,9 +134,14 @@ RSpec.describe 'API integration tests' do
       let(:user_id) { SecureRandom.uuid }
 
       it 'should return all the services that user contributed to' do
-        services = 2.times.map do
+        services = 2.times.map do |number|
           new_service = parse_response(metadata_api_test_client.create_service(
-            body: { "metadata": service.merge("created_by": user_id) }.to_json,
+            body: {
+              'metadata': service.merge(
+                'created_by': user_id,
+                'service_name': "Service #{number}"
+              )
+            }.to_json,
             authorisation_headers: authorisation_headers
           ))
 
@@ -146,7 +151,12 @@ RSpec.describe 'API integration tests' do
           }
         end
         metadata_api_test_client.create_service(
-          body: { "metadata": service.merge("created_by": SecureRandom.uuid) }.to_json,
+          body: {
+            "metadata": service.merge(
+              "created_by": SecureRandom.uuid,
+              "service_name": 'Moff Gideon'
+            )
+          }.to_json,
           authorisation_headers: authorisation_headers
         )
 
