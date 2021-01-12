@@ -16,7 +16,7 @@ RSpec.describe MetadataSerialiser do
 
   context '#latest_metadata' do
     it 'metadata should be valid against the base schema' do
-      service = Service.create(service_params)
+      service = Service.create!(service_params)
       serialiser = MetadataSerialiser.new(service, service.latest_metadata)
       expect(serialiser.attributes).to match_schema('service.base')
     end
