@@ -83,7 +83,7 @@ GEM
     faraday (1.1.0)
       multipart-post (>= 1.2, < 3)
       ruby2_keywords
-    fb-jwt-auth (0.4.0)
+    fb-jwt-auth (0.5.0)
       activesupport
       json
       jwt
@@ -224,7 +224,7 @@ DEPENDENCIES
   byebug
   database_cleaner-active_record
   factory_bot_rails
-  fb-jwt-auth (~> 0.4.0)
+  fb-jwt-auth (~> 0.5.0)
   httparty
   metadata_presenter (~> 0.1.6)
   pg (>= 0.18, < 2.0)
