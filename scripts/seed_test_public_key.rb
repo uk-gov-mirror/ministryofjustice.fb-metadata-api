@@ -15,11 +15,11 @@ def add_public_key_to_redis(public_key_file)
   puts `docker-compose exec metadata-app-service-token-cache-redis redis-cli get 'encoded-public-key-integration-tests'`
   puts
 
-  puts "Adding the key 'encoded-public-key-fb-editor' in Redis."
-  `docker-compose exec metadata-app-service-token-cache-redis redis-cli set 'encoded-public-key-fb-editor' #{encoded_public_key}`
+  puts "Adding the key 'encoded-public-key-editor' in Redis."
+  `docker-compose exec metadata-app-service-token-cache-redis redis-cli set 'encoded-public-key-editor' #{encoded_public_key}`
 
-  puts "======= Value in Redis of the key encoded-public-key-fb-editor ========"
-  puts `docker-compose exec metadata-app-service-token-cache-redis redis-cli get 'encoded-public-key-fb-editor'`
+  puts "======= Value in Redis of the key encoded-public-key-editor ========"
+  puts `docker-compose exec metadata-app-service-token-cache-redis redis-cli get 'encoded-public-key-editor'`
   puts
 end
 
