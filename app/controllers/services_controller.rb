@@ -18,7 +18,7 @@ class ServicesController < ApplicationController
   end
 
   def services_for_user
-    services = Service.joins(:metadata).where("metadata.created_by" => params[:user_id])
+    services = Service.where(created_by: params[:user_id])
 
     render json: ServicesSerializer.new(services).attributes, status: :ok
   end
