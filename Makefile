@@ -1,6 +1,10 @@
 UID ?= $(shell id -u)
 DOCKER_COMPOSE = env UID=$(UID) docker-compose -f docker-compose.yml
 
+.PHONY: down
+down:
+	docker-compose down
+
 .PHONY: build
 build:
 	$(DOCKER_COMPOSE) up -d --build metadata-app
@@ -33,7 +37,7 @@ load-test-local: setup
 	cat spec/fixtures/private.pem | base64 | xargs ./bin/load-test
 
 .PHONY: setup
-setup: seed_public_key build
+setup: down seed_public_key build
 
 .PHONY: get_private_key
 get_private_key: setup

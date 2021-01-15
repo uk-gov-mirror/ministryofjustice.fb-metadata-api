@@ -4,6 +4,7 @@ RSpec.describe 'GET /services/users/:user_id' do
     create(
       :service,
       name: 'Service 1',
+      created_by: 'greedo',
       metadata: [build(:metadata, created_by: 'greedo')]
     )
   end
@@ -11,6 +12,7 @@ RSpec.describe 'GET /services/users/:user_id' do
     create(
       :service,
       name: 'Service 2',
+      created_by: 'han',
       metadata: [build(:metadata, created_by: 'han')]
     )
   end
@@ -18,6 +20,7 @@ RSpec.describe 'GET /services/users/:user_id' do
     create(
       :service,
       name: 'Service 3',
+      created_by: 'greedo',
       metadata: [build(:metadata, created_by: 'greedo')]
     )
   end
