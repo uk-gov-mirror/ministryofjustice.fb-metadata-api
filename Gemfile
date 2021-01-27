@@ -7,7 +7,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'fb-jwt-auth', '~> 0.5.0'
 gem 'metadata_presenter', '~> 0.3.0'
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 5.1'
+gem 'puma', '~> 5.2'
 gem 'rails', '~> 6.1.1'
 gem 'sentry-raven'
 gem 'tzinfo-data'
