@@ -8,7 +8,7 @@ gem 'fb-jwt-auth', '~> 0.5.0'
 gem 'metadata_presenter', '~> 0.13.3'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 5.2'
-gem 'rails', '~> 6.1.2'
+gem 'rails', '~> 6.1.3'
 gem 'sentry-raven'
 gem 'tzinfo-data'
 
