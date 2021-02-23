@@ -59,6 +59,16 @@ jobs:
           success_message: ":rocket:  Successfully deployed to Test  :guitar:"
           failure_message: ":alert:  Failed to deploy to Test  :try_not_to_cry:"
           include_job_number_field: false
+  remove_acceptance_tests_services:
+    working_directory: ~/circle
+    docker:
+      - image: cimg/ruby:2.7.2
+    steps:
+      - checkout
+      - run:
+          name: remove acceptance tests services
+          command: 'bundle exec rake remove_acceptance_tests_services'
+      - slack/status: *slack_status
 
 workflows:
   version: 2
@@ -72,3 +82,13 @@ workflows:
             branches:
               only:
                 - main
+  remove_acceptance_tests_services:
+    triggers:
+      - schedule:
+          cron: "0 6 * * *"
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - remove_acceptance_tests_services
