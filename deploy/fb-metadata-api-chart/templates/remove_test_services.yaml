@@ -1,8 +1,8 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: fb-metadata-api-cron-remove-acceptance-services-test
-  namespace: formbuilder-saas-test
+  name: fb-metadata-api-cron-remove-acceptance-services-{{ .Values.environmentName }}
+  namespace: formbuilder-saas-{{ .Values.environmentName }}
 spec:
   schedule: "0 6 * * *"
   successfulJobsHistoryLimit: 0
@@ -11,7 +11,7 @@ spec:
       template:
         spec:
           containers:
-          - name: "fb-metadata-api-test"
+          - name: "fb-metadata-api-{{ .Values.environmentName }}"
             image: "754256621582.dkr.ecr.eu-west-2.amazonaws.com/formbuilder/fb-metadata-api:{{ .Values.circleSha1 }}"
             args:
             - /bin/sh
@@ -25,25 +25,25 @@ spec:
                   name: fb-metadata-api-config-map
             env:
               - name: SENTRY_CURRENT_ENV
-                value: test
+                value: {{ .Values.environmentName }}
               - name: SECRET_KEY_BASE
                 valueFrom:
                   secretKeyRef:
-                    name: fb-metadata-api-secrets-test
+                    name: fb-metadata-api-secrets-{{ .Values.environmentName }}
                     key: secret_key_base
               - name: ENCODED_PRIVATE_KEY
                 valueFrom:
                   secretKeyRef:
-                    name: fb-metadata-api-secrets-test
+                    name: fb-metadata-api-secrets-{{ .Values.environmentName }}
                     key: encoded_private_key
               - name: DATABASE_URL
                 valueFrom:
                   secretKeyRef:
-                    name: rds-instance-formbuilder-metadata-api-test
+                    name: rds-instance-formbuilder-metadata-api-{{ .Values.environmentName }}
                     key: url
               - name: SENTRY_DSN
                 valueFrom:
                   secretKeyRef:
-                    name: fb-metadata-api-secrets-test
+                    name: fb-metadata-api-secrets-{{ .Values.environmentName }}
                     key: sentry_dsn
           restartPolicy: Never
