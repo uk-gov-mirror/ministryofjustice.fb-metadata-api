@@ -98,7 +98,6 @@ workflows:
             branches:
               only:
                 - main
-                - deploy/live
       - confirm_live_deploy:
           type: approval
           requires:
