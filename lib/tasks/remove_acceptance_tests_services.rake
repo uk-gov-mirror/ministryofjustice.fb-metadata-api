@@ -4,7 +4,7 @@ Usage
 rake remove_acceptance_tests_services
 "
 task :remove_acceptance_tests_services => :environment do |_t, args|
-  services = Service.where("name like ?", "%Acceptance-test-Stormtrooper-FN%")
+  services = Service.where(created_by: '1234')
   if services.empty?
     puts 'No services to destroy'
   else
