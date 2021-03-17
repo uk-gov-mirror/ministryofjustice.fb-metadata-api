@@ -98,6 +98,11 @@ workflows:
             branches:
               only:
                 - main
+      - slack/approval-notification:
+          message: ":portalorangeparrot:  Deployment to Live pending approval  :portalblueparrot:"
+          include_job_number_field: false
+          requires:
+            - build_and_deploy_to_test
       - confirm_live_deploy:
           type: approval
           requires:
