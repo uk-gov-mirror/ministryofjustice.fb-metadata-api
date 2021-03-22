@@ -7,6 +7,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'fb-jwt-auth', '~> 0.6.0'
 gem 'metadata_presenter', '~> 0.19.2'
 gem 'pg', '>= 0.18', '< 2.0'
+gem 'prometheus-client', '~> 2.1.0'
 gem 'puma', '~> 5.2'
 gem 'rails', '~> 6.1.3'
 gem 'sentry-ruby', '~> 4.3.0'
