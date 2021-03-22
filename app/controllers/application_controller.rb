@@ -4,6 +4,7 @@ class ApplicationController < ActionController::API
     MetadataVersionNotFound
   ]
   rescue_from(*NOT_FOUND_EXCEPTIONS) do |exception|
+    Sentry.capture_exception(exception)
     render json: ErrorsSerializer.new(
       message: exception.message
     ).attributes, status: :not_found
@@ -17,6 +18,7 @@ class ApplicationController < ActionController::API
     Fb::Jwt::Auth::TokenExpiredError
   ]
   rescue_from(*FB_JWT_EXCEPTIONS) do |exception|
+    Sentry.capture_exception(exception)
     render json: ErrorsSerializer.new(
       message: exception.message
     ).attributes, status: :forbidden
