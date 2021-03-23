@@ -70,6 +70,8 @@ spec:
               secretKeyRef:
                 name: fb-metadata-api-secrets-{{ .Values.environmentName }}
                 key: sentry_dsn
+          - name: PLATFORM_ENV
+            value: {{ .Values.environmentName }}
       volumes:
         - name: tmp-files
           emptyDir: {}
