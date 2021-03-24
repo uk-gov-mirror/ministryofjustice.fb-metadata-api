@@ -5,10 +5,13 @@ metadata:
   namespace: formbuilder-saas-{{ .Values.environmentName }}
 spec:
   schedule: "0 6 * * *"
-  successfulJobsHistoryLimit: 0
+  successfulJobsHistoryLimit: 1
   jobTemplate:
     spec:
       template:
+        metadata:
+          labels:
+            remove-acceptance-tests-services: cronjob
         spec:
           containers:
           - name: "fb-metadata-api-{{ .Values.environmentName }}"
