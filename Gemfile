@@ -5,7 +5,8 @@ ruby '2.7.2'
 # Metadata presenter - if you need to be on development you can uncomment
 # one of these lines:
 gem 'metadata_presenter',
-     git: 'git@github.com:ministryofjustice/fb-metadata-presenter.git',
+     #git: 'git@github.com:ministryofjustice/fb-metadata-presenter.git',
+     github: 'ministryofjustice/fb-metadata-presenter',
      branch: 'page-types-in-base-schema'
 #gem 'metadata_presenter', path: '../fb-metadata-presenter'
 # gem 'metadata_presenter', '~> 0.21.1'

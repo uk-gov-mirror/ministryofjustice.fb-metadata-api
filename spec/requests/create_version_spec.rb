@@ -55,7 +55,7 @@ RSpec.describe 'POST /services/:id/versions' do
         expect(
           response_body['message']
         ).to eq(
-          ["The property '#/metadata' did not contain a required property of '_id'"]
+          ["The property '#/components/0' did not contain a required property of 'html'"]
         )
       end
     end
