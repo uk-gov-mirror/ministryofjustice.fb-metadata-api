@@ -5,10 +5,10 @@ ruby '2.7.2'
 # Metadata presenter - if you need to be on development you can uncomment
 # one of these lines:
 gem 'metadata_presenter',
-     github: 'ministryofjustice/fb-metadata-presenter',
-     branch: 'additional-fixtures'
+     git: 'git@github.com:ministryofjustice/fb-metadata-presenter.git',
+     branch: 'page-types-in-base-schema'
 #gem 'metadata_presenter', path: '../fb-metadata-presenter'
-#gem 'metadata_presenter', '~> 0.21.0'
+# gem 'metadata_presenter', '~> 0.21.1'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'fb-jwt-auth', '~> 0.6.0'
 gem 'pg', '>= 0.18', '< 2.0'
