@@ -38,5 +38,26 @@ RSpec.describe 'POST /services/:id/versions' do
         ["The property '#/metadata' did not contain a required property of '_id'"]
       )
     end
+
+    context 'when adding an input component to a content page' do
+      let(:version) do
+        JSON.parse(
+          File.read(fixtures_directory.join('invalid_content_page.json'))
+        ).merge(service_id: service.id).deep_symbolize_keys
+      end
+      let(:params) { { metadata: version } }
+
+      it 'returns unprocessable entity' do
+        expect(response.status).to be(422)
+      end
+
+      it 'returns error messages' do
+        expect(
+          response_body['message']
+        ).to eq(
+          ["The property '#/metadata' did not contain a required property of '_id'"]
+        )
+      end
+    end
   end
 end
