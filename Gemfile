@@ -10,16 +10,16 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'prometheus-client', '~> 2.1.0'
 gem 'puma', '~> 5.2'
 gem 'rails', '~> 6.1.3'
-gem 'sentry-ruby', '~> 4.3.1'
 gem 'sentry-rails', '~> 4.3.2'
+gem 'sentry-ruby', '~> 4.3.1'
 gem 'tzinfo-data'
 
 group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'httparty'
-  gem 'factory_bot_rails'
-  gem 'rspec-rails'
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'database_cleaner-active_record'
+  gem 'factory_bot_rails'
+  gem 'httparty'
+  gem 'rspec-rails'
 end
 
 group :development do

@@ -29,13 +29,13 @@ RSpec.describe 'POST /services', type: :request do
 
     it 'returns service id' do
       expect(
-        Service.exists?(response_body["service_id"])
+        Service.exists?(response_body['service_id'])
       ).to be_truthy
     end
 
     it 'returns version id' do
       expect(
-        Metadata.exists?(response_body["version_id"])
+        Metadata.exists?(response_body['version_id'])
       ).to be_truthy
     end
   end
@@ -78,7 +78,7 @@ RSpec.describe 'POST /services', type: :request do
       expect(
         response_body['message']
       ).to match_array(
-        ["Name has already been taken"]
+        ['Name has already been taken']
       )
     end
   end

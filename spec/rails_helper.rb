@@ -4,7 +4,7 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 require 'database_cleaner/active_record'
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -65,7 +65,7 @@ RSpec.configure do |config|
   # "You may want to combine the before(:each) we just added with the
   # previous one but DON'T. If you combine them, Database Cleaner will
   # open a transaction before being set to use truncation, which means
-  # Capybara won’t be able to “see” the test database records."
+  # Capybara won't be able to "see" the test database records."
   # see https://www.devmynd.com/blog/setting-up-rspec-and-capybara-in-rails-5-for-testing/
   config.before do
     DatabaseCleaner.start

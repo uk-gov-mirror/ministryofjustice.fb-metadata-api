@@ -2,20 +2,20 @@ RSpec.shared_examples 'application authentication' do
   let(:params) do
     {
       "metadata": {
-        "service_name": "Service Name",
-        "created_by": "4634ec01-5618-45ec-a4e2-bb5aa587e751",
+        "service_name": 'Service Name',
+        "created_by": '4634ec01-5618-45ec-a4e2-bb5aa587e751',
         "configuration": {
-           "_id": "service",
-           "_type": "config.service"
-         },
+          "_id": 'service',
+          "_type": 'config.service'
+        },
         "pages": [
           {
-            "_id": "page.start",
-            "_type": "page.start",
-            "url": "/"
+            "_id": 'page.start',
+            "_type": 'page.start',
+            "url": '/'
           }
         ],
-        "locale": "en"
+        "locale": 'en'
       }
     }
   end

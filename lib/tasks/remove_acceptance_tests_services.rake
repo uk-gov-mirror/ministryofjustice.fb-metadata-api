@@ -3,7 +3,7 @@ Remove the services created by acceptance tests
 Usage
 rake remove_acceptance_tests_services
 "
-task :remove_acceptance_tests_services => :environment do |_t, args|
+task remove_acceptance_tests_services: :environment do |_t, _args|
   if ENV['PLATFORM_ENV'] == 'test'
     begin
       # acceptance tests services are created by the same user during each run
@@ -13,7 +13,7 @@ task :remove_acceptance_tests_services => :environment do |_t, args|
       else
         puts "About to destroy #{services.count} services"
         services.destroy_all
-        puts "Done"
+        puts 'Done'
       end
     rescue StandardError => e
       Sentry.capture_exception(e)

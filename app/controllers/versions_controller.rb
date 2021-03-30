@@ -29,19 +29,17 @@ class VersionsController < ApplicationController
   def show
     metadata = service.metadata.find_by(id: params[:id])
     if metadata.nil?
-      raise MetadataVersionNotFound.new(
-        "Couldn't find Metadata Version with 'id'=#{params[:id]}"
-      )
+      raise MetadataVersionNotFound, "Couldn't find Metadata Version with 'id'=#{params[:id]}"
     end
 
     render json: MetadataSerialiser.new(service, metadata).attributes, status: :ok
   end
 
   def service
-    @_service ||= Service.find(params[:service_id])
+    @service ||= Service.find(params[:service_id])
   end
 
   def locale
-    @_locale ||= params[:locale] || 'en'
+    @locale ||= params[:locale] || 'en'
   end
 end

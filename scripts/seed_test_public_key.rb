@@ -11,18 +11,17 @@ def add_public_key_to_redis(public_key_file)
   puts "Adding the key 'encoded-public-key-fb-integration-tests' in Redis."
   `docker-compose exec metadata-app-service-token-cache-redis redis-cli set 'encoded-public-key-integration-tests' #{encoded_public_key}`
 
-  puts "======= encoded-public-key-integration-tests ======"
+  puts '======= encoded-public-key-integration-tests ======'
   puts `docker-compose exec metadata-app-service-token-cache-redis redis-cli get 'encoded-public-key-integration-tests'`
   puts
 
   puts "Adding the key 'encoded-public-key-editor' in Redis."
   `docker-compose exec metadata-app-service-token-cache-redis redis-cli set 'encoded-public-key-editor' #{encoded_public_key}`
 
-  puts "======= Value in Redis of the key encoded-public-key-editor ========"
+  puts '======= Value in Redis of the key encoded-public-key-editor ========'
   puts `docker-compose exec metadata-app-service-token-cache-redis redis-cli get 'encoded-public-key-editor'`
   puts
 end
-
 
 if File.exist?(private_key_file) && File.exist?(public_key_file)
   add_public_key_to_redis(public_key_file)

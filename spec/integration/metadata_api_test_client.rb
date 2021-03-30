@@ -3,7 +3,7 @@ class MetadataApiTestClient
   base_uri 'metadata-app:3000'
   attr_reader :headers
 
-  def initialize(options: {})
+  def initialize
     @headers = {
       Accept: 'application/json',
       'Content-Type': 'application/json'
@@ -12,7 +12,7 @@ class MetadataApiTestClient
 
   def create_service(body:, authorisation_headers:)
     self.class.post(
-      "/services",
+      '/services',
       {
         body: body,
         headers: headers.merge(authorisation_headers)

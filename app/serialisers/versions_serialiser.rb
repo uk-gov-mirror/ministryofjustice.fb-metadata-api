@@ -14,7 +14,7 @@ class VersionsSerialiser
     }
   end
 
-  private
+private
 
   def all_versions
     versions.map do |version|

@@ -3,7 +3,7 @@ require_relative 'metadata_api_test_client'
 RSpec.describe 'API integration tests' do
   let(:metadata_api_test_client) { MetadataApiTestClient.new }
   let(:jwt_payload) do
-    { iss: 'integration-tests', namespace: 'awesome-namespace', iat: Time.now.to_i }
+    { iss: 'integration-tests', namespace: 'awesome-namespace', iat: Time.zone.now.to_i }
   end
   let(:private_key) do
     key = File.read(Rails.root.join('spec', 'fixtures', 'private.pem'))
@@ -101,10 +101,10 @@ RSpec.describe 'API integration tests' do
 
         versions << 3.times.map do
           new_version = parse_response(metadata_api_test_client.new_version(
-            service_id: metadata[:service_id],
-            body: { "metadata": metadata }.to_json,
-            authorisation_headers: authorisation_headers
-          ))
+                                         service_id: metadata[:service_id],
+                                         body: { "metadata": metadata }.to_json,
+                                         authorisation_headers: authorisation_headers
+                                       ))
 
           {
             version_id: new_version[:version_id],
@@ -126,7 +126,7 @@ RSpec.describe 'API integration tests' do
         )
 
         latest_version = parse_response(response)
-        expect(all_versions[:versions].first[:version_id]). to eq(latest_version[:version_id])
+        expect(all_versions[:versions].first[:version_id]).to eq(latest_version[:version_id])
       end
     end
 
@@ -136,18 +136,18 @@ RSpec.describe 'API integration tests' do
       it 'should return all the services that user contributed to' do
         services = 2.times.map do |number|
           new_service = parse_response(metadata_api_test_client.create_service(
-            body: {
-              'metadata': service.merge(
-                'created_by': user_id,
-                'service_name': "Service #{number}"
-              )
-            }.to_json,
-            authorisation_headers: authorisation_headers
-          ))
+                                         body: {
+                                           'metadata': service.merge(
+                                             'created_by': user_id,
+                                             'service_name': "Service #{number}"
+                                           )
+                                         }.to_json,
+                                         authorisation_headers: authorisation_headers
+                                       ))
 
           {
             service_id: new_service[:service_id],
-            service_name: new_service[:service_name],
+            service_name: new_service[:service_name]
           }
         end
         metadata_api_test_client.create_service(
@@ -161,9 +161,9 @@ RSpec.describe 'API integration tests' do
         )
 
         services_for_user = parse_response(metadata_api_test_client.get_services_for_user(
-          user_id: user_id,
-          authorisation_headers: authorisation_headers
-        ))[:services]
+                                             user_id: user_id,
+                                             authorisation_headers: authorisation_headers
+                                           ))[:services]
 
         expect(services_for_user).to match_array(services.flatten)
       end
@@ -264,7 +264,7 @@ RSpec.describe 'API integration tests' do
 
   context 'when not passing a issuer' do
     let(:jwt_payload) do
-      { namespace: 'awesome-namespace', iat: Time.now.to_i }
+      { namespace: 'awesome-namespace', iat: Time.zone.now.to_i }
     end
 
     it 'returns 403 with issuer not present message' do
@@ -282,7 +282,7 @@ RSpec.describe 'API integration tests' do
 
   context 'when not passing a namespace' do
     let(:jwt_payload) do
-      { iss: 'integration-tests', iat: Time.now.to_i }
+      { iss: 'integration-tests', iat: Time.zone.now.to_i }
     end
 
     it 'returns 403 with namespace not present message' do
@@ -303,7 +303,7 @@ RSpec.describe 'API integration tests' do
       {
         iss: 'integration-tests',
         namespace: 'awesome-namespace',
-        iat: (Time.now - 24.hours).to_i
+        iat: (Time.zone.now - 24.hours).to_i
       }
     end
 
