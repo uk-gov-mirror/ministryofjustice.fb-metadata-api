@@ -33,7 +33,7 @@ class ApplicationController < ActionController::API
     ).attributes, status: :not_found
   end
 
-private
+  private
 
   def service_params
     params.permit(:metadata)
