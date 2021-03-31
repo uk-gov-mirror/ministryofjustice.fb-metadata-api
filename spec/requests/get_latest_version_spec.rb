@@ -100,7 +100,7 @@ RSpec.describe 'GET /services/:service_id/versions/latest' do
 
   context 'when service does not exist' do
     before do
-      get "/services/1234-abcdef/versions/latest", as: :json
+      get '/services/1234-abcdef/versions/latest', as: :json
     end
 
     it 'returns not found response' do

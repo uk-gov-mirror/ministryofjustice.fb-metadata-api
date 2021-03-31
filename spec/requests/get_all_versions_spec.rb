@@ -44,7 +44,7 @@ RSpec.describe 'GET /services/:service_id/versions' do
               'version_id' => first_version.id,
               'created_at' => first_version.created_at.iso8601
             }
-          ],
+          ]
         })
       end
     end

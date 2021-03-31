@@ -14,6 +14,9 @@ jobs:
           name: security
           command: docker-compose run --rm metadata-app bundle exec brakeman -q --no-pager
       - run:
+          name: lint
+          command: docker-compose run --rm metadata-app bundle exec rubocop
+      - run:
           name: test
           command: make spec
       - slack/status: &slack_status

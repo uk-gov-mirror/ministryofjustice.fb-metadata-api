@@ -31,7 +31,7 @@ RSpec.describe 'GET /services/users/:user_id' do
 
   context 'when there are services which the user contributed to' do
     before do
-      get "/services/users/greedo", as: :json
+      get '/services/users/greedo', as: :json
     end
 
     it 'returns success response' do
@@ -42,12 +42,12 @@ RSpec.describe 'GET /services/users/:user_id' do
       expect(response_body['services']).to match_array(
         [
           {
-            "service_name" => service_one.name,
-            "service_id" => service_one.id
+            'service_name' => service_one.name,
+            'service_id' => service_one.id
           },
           {
-            "service_name" => service_three.name,
-            "service_id" => service_three.id
+            'service_name' => service_three.name,
+            'service_id' => service_three.id
           }
         ]
       )
@@ -56,7 +56,7 @@ RSpec.describe 'GET /services/users/:user_id' do
 
   context 'when there are no services which the user contributed to' do
     before do
-      get "/services/users/jabba", as: :json
+      get '/services/users/jabba', as: :json
     end
 
     it 'returns success response' do

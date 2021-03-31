@@ -2,7 +2,7 @@ class ApplicationController < ActionController::API
   NOT_FOUND_EXCEPTIONS = [
     ActiveRecord::RecordNotFound,
     MetadataVersionNotFound
-  ]
+  ].freeze
   rescue_from(*NOT_FOUND_EXCEPTIONS) do |exception|
     Sentry.capture_exception(exception)
     render json: ErrorsSerializer.new(
@@ -16,7 +16,7 @@ class ApplicationController < ActionController::API
     Fb::Jwt::Auth::IssuerNotPresentError,
     Fb::Jwt::Auth::NamespaceNotPresentError,
     Fb::Jwt::Auth::TokenExpiredError
-  ]
+  ].freeze
   rescue_from(*FB_JWT_EXCEPTIONS) do |exception|
     Sentry.capture_exception(exception)
     render json: ErrorsSerializer.new(

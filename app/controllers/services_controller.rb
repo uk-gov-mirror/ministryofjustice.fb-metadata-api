@@ -13,7 +13,7 @@ class ServicesController < ApplicationController
       render json:
         ErrorsSerializer.new(
           message: service.errors.full_messages
-      ).attributes, status: :unprocessable_entity
+        ).attributes, status: :unprocessable_entity
     end
   end
 
